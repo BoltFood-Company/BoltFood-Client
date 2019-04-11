@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">Bolt Food Client</string>
+    <string name="app_name">BoltFood</string>
+
+    <string name="nome">Nome</string>
+    <string name="cpf">CPF</string>
+    <string name="datanascimento">Data de Nascimento</string>
+    <string name="telefone">Telefone</string>
+    <string name="masculino">Masculino</string>
+    <string name="feminino">Feminino</string>
+    <string name="email">E-mail</string>
+    <string name="senha">Senha</string>
+    <string name="cadastrese">Cadastre-se</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="voltar">Voltar</string>
+    <string name="login">Login</string>
+    <string name="semcadastro">Não tem Cadastro ? Clique aqui.</string>
+
+    <string name="validacaonome">Por favor, informe seu nome.</string>
+    <string name="validacaodocumento">Por favor, informe seu CPF.</string>
+    <string name="validacaosexo">Por favor, informe seu sexo.</string>
+    <string name="validacaoemail">Por favor, informe seu e-mail.</string>
+    <string name="validacaodatanascimento">Por favor, informe sua Data de Nascimento.</string>
+    <string name="validacaologin">Por favor, informe seu login.</string>
+    <string name="cpfinvalido">CPF inválido.</string>
+    <string name="validacaosenha">Por favor, informe a senha.</string>
+    <string name="emailexistente">O e-mail informado, já está cadastrado.</string>
+
+
 </resources>
