@@ -23,6 +23,7 @@
     <string name="validacaologin">Por favor, informe seu login.</string>
     <string name="cpfinvalido">CPF inválido.</string>
     <string name="validacaosenha">Por favor, informe a senha.</string>
+    <string name="emailexistente">O e-mail informado, já está cadastrado.</string>
 
 
 </resources>

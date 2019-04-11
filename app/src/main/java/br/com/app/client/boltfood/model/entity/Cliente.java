@@ -26,8 +26,7 @@ public class Cliente implements Serializable {
 
     }
 
-    public Cliente(Integer id, String nome, String cpf, Date dataNascimento, Sexo sexo, String telefone, String email, String senha) {
-        this.id = id;
+    public Cliente(String nome, String cpf, Date dataNascimento, Sexo sexo, String telefone, String email, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;

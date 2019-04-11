@@ -1,12 +1,22 @@
 package br.com.app.client.boltfood.view;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
 import br.com.app.client.boltfood.R;
+import br.com.app.client.boltfood.controller.ClienteController;
+import br.com.app.client.boltfood.model.entity.Cliente;
+import br.com.app.client.boltfood.model.entity.enums.Sexo;
 import br.com.app.client.boltfood.model.entity.util.Documento;
 import br.com.app.client.boltfood.model.entity.util.Validacao;
 
@@ -20,6 +30,9 @@ public class ClienteActivity extends AppCompatActivity {
     private EditText senhaCliente;
     private RadioButton masculino;
     private RadioButton feminino;
+
+    private Cliente cliente;
+    private ClienteController clienteController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,19 +55,34 @@ public class ClienteActivity extends AppCompatActivity {
             return;
         }
 
-        /*
-        clienteDAO = new ClienteDAO();
-        cliente = new Cliente();
-        cliente.setNome(nomeCliente.getText().toString());
-        cliente.setDocumento(documentoCliente.getText().toString());
-        //cliente.setDataNascimento((Date)documentoCliente.getText());
-        cliente.setTelefone(telefoneCliente.getText().toString());
-        cliente.setEmail(emailCliente.getText().toString());
-        cliente.setSenha(senhaCliente.getText().toString());
-        cliente.setSexo((masculino.isChecked() ? "Masculino" : "Feminino"));
+        //Valida Se email já existe.
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.createUserWithEmailAndPassword(emailCliente.getText().toString(), senhaCliente.getText().toString())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
 
-        clienteDAO.insereCliente(cliente);
-        */
+                            cliente = new Cliente();
+                            cliente.setNome(nomeCliente.getText().toString());
+                            cliente.setCpf(documentoCliente.getText().toString());
+                            //cliente.setDataNascimento(documentoCliente.getDa);
+                            cliente.setTelefone(telefoneCliente.getText().toString());
+                            cliente.setEmail(emailCliente.getText().toString());
+                            cliente.setSenha(senhaCliente.getText().toString());
+                            cliente.setSexo((masculino.isChecked() ? Sexo.MASCULINO : Sexo.FEMININO));
+
+                            clienteController = new ClienteController();
+                            clienteController.inserirCliente(cliente);
+
+                        } else {
+                            emailCliente.setError(getString(R.string.emailexistente));
+                            emailCliente.requestFocus();
+                        }
+                    }
+                });
+
+
     }
 
     private boolean validaCampos(){
@@ -70,7 +98,7 @@ public class ClienteActivity extends AppCompatActivity {
         }
 
         if (!Validacao.validarEditText(senhaCliente, getString(R.string.validacaosenha))){
-            nomeCliente.requestFocus();
+            senhaCliente.requestFocus();
             return false;
         }
 
