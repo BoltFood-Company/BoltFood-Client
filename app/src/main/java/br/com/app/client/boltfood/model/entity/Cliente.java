@@ -11,7 +11,7 @@ import br.com.app.client.boltfood.model.entity.enums.Sexo;
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private String id;
     private String nome;
     private String cpf;
     private Date dataNascimento;
@@ -26,7 +26,8 @@ public class Cliente implements Serializable {
 
     }
 
-    public Cliente(String nome, String cpf, Date dataNascimento, Sexo sexo, String telefone, String email, String senha) {
+    public Cliente(String id, String nome, String cpf, Date dataNascimento, Sexo sexo, String telefone, String email, String senha) {
+        this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -37,11 +38,11 @@ public class Cliente implements Serializable {
     }
 
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

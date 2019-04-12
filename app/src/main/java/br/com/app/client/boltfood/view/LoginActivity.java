@@ -27,9 +27,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         login = findViewById(R.id.emailLoginEditText);
+        login = findViewById(R.id.emailLoginEditText);
         password = findViewById(R.id.passwordLoginEditText);
     }
-
     public void logar(View view) {
 
         //validaçoes campos vazios
@@ -39,11 +39,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            /*
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);*/
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         } else {
@@ -52,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 
     public void cadastrar(View view){

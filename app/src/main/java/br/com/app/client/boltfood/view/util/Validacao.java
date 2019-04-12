@@ -1,4 +1,4 @@
-package br.com.app.client.boltfood.model.entity.util;
+package br.com.app.client.boltfood.view.util;
 
 import android.widget.EditText;
 
