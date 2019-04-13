@@ -38,4 +38,7 @@
     <string name="cvccartao">CVC</string>
     <string name="nomecartao">Nome no cartão</string>
     <string name="documentotitularcartao">CPF do titular do cartão</string>
+
+    <string name="descricaologoapp">Logo aplicativo</string>
+
 </resources>
