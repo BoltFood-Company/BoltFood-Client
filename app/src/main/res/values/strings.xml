@@ -31,7 +31,11 @@
     <string name="validacaoconfirmacaoemail">Por favor, confirme seu e-mail.</string>
     <string name="validacaoconfirmacaosenha">Por favor, confirme sua senha.</string>
 
+    <string name="informativocartao">Digite as informações do cartão de crédito que você deseja usar para pagamento</string>
 
-
-
+    <string name="numerocartao">Número do cartão</string>
+    <string name="validadecartao">Validade</string>
+    <string name="cvccartao">CVC</string>
+    <string name="nomecartao">Nome no cartão</string>
+    <string name="documentotitularcartao">CPF do titular do cartão</string>
 </resources>

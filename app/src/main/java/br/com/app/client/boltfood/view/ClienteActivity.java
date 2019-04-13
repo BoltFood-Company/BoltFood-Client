@@ -11,7 +11,7 @@ import br.com.app.client.boltfood.controller.ClienteController;
 import br.com.app.client.boltfood.model.entity.Cliente;
 import br.com.app.client.boltfood.model.entity.enums.Sexo;
 import br.com.app.client.boltfood.view.util.Documento;
-import br.com.app.client.boltfood.view.util.Mask;
+import br.com.app.client.boltfood.view.util.Mascara;
 import br.com.app.client.boltfood.view.util.Validacao;
 
 public class ClienteActivity extends AppCompatActivity {
@@ -46,9 +46,14 @@ public class ClienteActivity extends AppCompatActivity {
         masculino = findViewById(R.id.masculinoRadioButton);
         feminino = findViewById(R.id.femininoRadioButton);
 
-        documentoCliente.addTextChangedListener(Mask.insert("###.###.###-##", documentoCliente));
-        dataNascimentoCliente.addTextChangedListener(Mask.insert("##/##/####", dataNascimentoCliente));
-        telefoneCliente.addTextChangedListener(Mask.insert("(##)#####-####", telefoneCliente));
+        Mascara mascaraTelefoneCliente = new Mascara("(##)#########", telefoneCliente);
+        telefoneCliente.addTextChangedListener(mascaraTelefoneCliente);
+
+        Mascara mascaraDataNascimentoCliente = new Mascara("##/##/####", dataNascimentoCliente);
+        dataNascimentoCliente.addTextChangedListener(mascaraDataNascimentoCliente);
+
+        Mascara mascaraDocumentoCliente = new Mascara("###.###.###-##", documentoCliente);
+        documentoCliente.addTextChangedListener(mascaraDocumentoCliente);
     }
 
     public void cadastrar(View view) {
