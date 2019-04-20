@@ -1,5 +1,6 @@
 package br.com.app.client.boltfood.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -70,6 +71,9 @@ public class CartaoActivity extends AppCompatActivity {
 
         cartaoController = new CartaoController();
         cartaoController.inserirCliente(cartao);
+
+        Intent intent = new Intent(getApplicationContext(), CartaoConfirmActivity.class);
+        startActivity(intent);
 
     }
 
