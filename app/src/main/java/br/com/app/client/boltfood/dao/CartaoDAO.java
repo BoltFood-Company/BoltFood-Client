@@ -10,5 +10,7 @@ public class CartaoDAO {
 
     public void inserirCartao(Cartao cartao) {
         db.collection("Cartao").add(cartao);
+
+
     }
 }

@@ -9,6 +9,7 @@ public class CartaoController {
 
     public void inserirCliente(Cartao cartao) {
         cartaoDAO = new CartaoDAO();
+
         cartaoDAO.inserirCartao(cartao);
     }
 }

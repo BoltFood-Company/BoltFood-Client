@@ -8,7 +8,9 @@
     <string name="masculino">Masculino</string>
     <string name="feminino">Feminino</string>
     <string name="email">E-mail</string>
+    <string name="confirmacaoemail">Confirme seu e-mail</string>
     <string name="senha">Senha</string>
+    <string name="confirmacaosenha">Confirme sua senha</string>
     <string name="cadastrese">Cadastre-se</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="voltar">Voltar</string>
@@ -17,6 +19,7 @@
 
     <string name="validacaonome">Por favor, informe seu nome.</string>
     <string name="validacaodocumento">Por favor, informe seu CPF.</string>
+    <string name="validacaotelefone">Por favor, informe seu telefone.</string>
     <string name="validacaosexo">Por favor, informe seu sexo.</string>
     <string name="validacaoemail">Por favor, informe seu e-mail.</string>
     <string name="validacaodatanascimento">Por favor, informe sua Data de Nascimento.</string>
@@ -25,5 +28,17 @@
     <string name="validacaosenha">Por favor, informe a senha.</string>
     <string name="emailexistente">O e-mail informado, já está cadastrado.</string>
 
+    <string name="validacaoconfirmacaoemail">Por favor, confirme seu e-mail.</string>
+    <string name="validacaoconfirmacaosenha">Por favor, confirme sua senha.</string>
+
+    <string name="informativocartao">Digite as informações do cartão de crédito que você deseja usar para pagamento</string>
+
+    <string name="numerocartao">Número do cartão</string>
+    <string name="validadecartao">Validade</string>
+    <string name="cvccartao">CVC</string>
+    <string name="nomecartao">Nome no cartão</string>
+    <string name="documentotitularcartao">CPF do titular do cartão</string>
+
+    <string name="descricaologoapp">Logo aplicativo</string>
 
 </resources>

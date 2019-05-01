@@ -1,11 +1,14 @@
 package br.com.app.client.boltfood.model.entity;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Cartao implements Serializable {
-    private static final long serialVersionUID = 1L;
+
 
     private String cpf, mes, ano, cvv, numeroCartao, nome, idUser;;
+
+
 
     public Cartao() {
 

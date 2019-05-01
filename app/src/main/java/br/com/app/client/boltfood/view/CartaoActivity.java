@@ -1,5 +1,6 @@
 package br.com.app.client.boltfood.view;
 
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,9 +17,11 @@ import br.com.app.client.boltfood.model.entity.Cartao;
 import br.com.app.client.boltfood.model.entity.util.Documento;
 import br.com.app.client.boltfood.model.entity.util.Validacao;
 
+
 public class CartaoActivity extends AppCompatActivity {
 
     private EditText numeroCartao;
+
     private EditText validadeMes;
     private EditText validadeAno;
     private EditText cvv;
@@ -31,12 +34,14 @@ public class CartaoActivity extends AppCompatActivity {
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao);
 
         numeroCartao = findViewById(R.id.numeroCartaoEditText);
+
         validadeMes = findViewById(R.id.validadeMesEditText);
         validadeAno = findViewById(R.id.validadeAnoEditText);
         nomeTitular = findViewById(R.id.nomeTitularEditText);
@@ -115,5 +120,6 @@ public class CartaoActivity extends AppCompatActivity {
         }
 
         return true;
+
     }
 }
