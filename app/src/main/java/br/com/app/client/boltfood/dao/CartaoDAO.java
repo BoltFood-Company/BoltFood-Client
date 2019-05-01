@@ -6,13 +6,11 @@ import br.com.app.client.boltfood.model.entity.Cartao;
 
 public class CartaoDAO {
 
-    private FirebaseFirestore db;
-
-    public CartaoDAO() {
-        db = FirebaseFirestore.getInstance();
-    }
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void inserirCartao(Cartao cartao) {
+        db.collection("Cartao").add(cartao);
+
 
     }
 }

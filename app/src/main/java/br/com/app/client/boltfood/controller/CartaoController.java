@@ -7,11 +7,9 @@ public class CartaoController {
 
     private CartaoDAO cartaoDAO;
 
-    public CartaoController(){
+    public void inserirCliente(Cartao cartao) {
         cartaoDAO = new CartaoDAO();
-    }
 
-    public void inserirCartao(Cartao cartao) {
         cartaoDAO.inserirCartao(cartao);
     }
 }

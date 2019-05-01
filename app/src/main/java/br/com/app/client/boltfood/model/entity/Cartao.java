@@ -5,79 +5,78 @@ import java.sql.Timestamp;
 
 public class Cartao implements Serializable {
 
-    private String id;
-    private long numeroCartao;
-    private Timestamp validadeCartao;
-    private int cvcCartao;
-    private String nomeTitularCartao;
-    private long documentoTitularCartao;
+
+    private String cpf, mes, ano, cvv, numeroCartao, nome, idUser;;
+
+
 
     public Cartao() {
 
     }
 
-    public Cartao(String id, long numeroCartao, Timestamp validadeCartao, int cvcCartao, String nomeTitularCartao, long documentoTitularCartao) {
-        this.id = id;
+    public Cartao(String cpf, String mes, String ano, String cvv, String numeroCartao, String nome, String idUser) {
+        this.cpf = cpf;
+        this.mes = mes;
+        this.ano = ano;
+        this.cvv = cvv;
         this.numeroCartao = numeroCartao;
-        this.validadeCartao = validadeCartao;
-        this.cvcCartao = cvcCartao;
-        this.nomeTitularCartao = nomeTitularCartao;
-        this.documentoTitularCartao = documentoTitularCartao;
+        this.nome = nome;
+        this.idUser = idUser;
     }
 
-    public Cartao(long numeroCartao, Timestamp validadeCartao, int cvcCartao, String nomeTitularCartao, long documentoTitularCartao) {
-        this.numeroCartao = numeroCartao;
-        this.validadeCartao = validadeCartao;
-        this.cvcCartao = cvcCartao;
-        this.nomeTitularCartao = nomeTitularCartao;
-        this.documentoTitularCartao = documentoTitularCartao;
+    public String getCpf() {
+        return cpf;
     }
 
-    public String getId() {
-        return id;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getMes() {
+        return mes;
     }
 
-    public long getNumeroCartao() {
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    public String getNumeroCartao() {
         return numeroCartao;
     }
 
-    public void setNumeroCartao(long numeroCartao) {
+    public void setNumeroCartao(String numeroCartao) {
         this.numeroCartao = numeroCartao;
     }
 
-    public Timestamp getValidadeCartao() {
-        return validadeCartao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setValidadeCartao(Timestamp validadeCartao) {
-        this.validadeCartao = validadeCartao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public int getCvcCartao() {
-        return cvcCartao;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setCvcCartao(int cvcCartao) {
-        this.cvcCartao = cvcCartao;
-    }
-
-    public String getNomeTitularCartao() {
-        return nomeTitularCartao;
-    }
-
-    public void setNomeTitularCartao(String nomeTitularCartao) {
-        this.nomeTitularCartao = nomeTitularCartao;
-    }
-
-    public long getDocumentoTitularCartao() {
-        return documentoTitularCartao;
-    }
-
-    public void setDocumentoTitularCartao(long documentoTitularCartao) {
-        this.documentoTitularCartao = documentoTitularCartao;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 }

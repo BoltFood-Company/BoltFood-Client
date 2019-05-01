@@ -8,26 +8,23 @@ import android.widget.Button;
 
 import br.com.app.client.boltfood.R;
 
-public class MainActivity extends AppCompatActivity {
-    private Button cadastroCartao;
+public class CartaoConfirmActivity extends AppCompatActivity {
+
+    private Button voltar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_cartao_confirm);
 
-        cadastroCartao = findViewById(R.id.cadastrarBtn);
+        voltar = findViewById(R.id.voltarBtn);
 
-
-        cadastroCartao.setOnClickListener(new View.OnClickListener() {
+        voltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CartaoActivity.class);
+                Intent intent = new Intent(getApplicationContext(), principalActivity.class);
                 startActivity(intent);
             }
         });
-
-
-
     }
 }
