@@ -45,9 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);*/
-                            Intent intent = new Intent(getApplicationContext(), principalActivity.class);
-
-
+                            Intent intent = new Intent(getApplicationContext(), PrincipalActivity.class);
                             startActivity(intent);
                         } else {
                             login.setError("email invalido");

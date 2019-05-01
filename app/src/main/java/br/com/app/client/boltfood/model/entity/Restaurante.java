@@ -13,6 +13,7 @@ public class Restaurante implements Serializable {
     private String razaoSocial;
     private String nomeFantasia;
     private String telefone;
+    private String url;
 
     private Universidade universidade;
 
@@ -22,13 +23,22 @@ public class Restaurante implements Serializable {
 
     }
 
-    public Restaurante(Integer id, String cnpj, String razaoSocial, String nomeFantasia, String telefone, Universidade universidade) {
+    public Restaurante(Integer id, String cnpj, String razaoSocial, String nomeFantasia, String telefone, Universidade universidade, String url) {
         this.id = id;
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
         this.nomeFantasia = nomeFantasia;
         this.telefone = telefone;
         this.universidade = universidade;
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Integer getId() {

@@ -17,4 +17,6 @@ public class RestauranteController {
         return restauranteDAO.buscarRestaurantes();
 
     }
+
+
 }
