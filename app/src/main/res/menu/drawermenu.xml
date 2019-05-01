@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/pedidos" android:title="Pedidos" android:icon="@drawable/pedido"/>
+    <item android:id="@+id/pagamento" android:title="Formas de Pagamento" android:icon="@drawable/pagamento"/>
+    <item android:id="@+id/configuracoes" android:title="Configurações" android:icon="@drawable/configuracoes"/>
+    <item android:id="@+id/sair" android:title="Sair" android:icon="@drawable/sair" />
+</menu>

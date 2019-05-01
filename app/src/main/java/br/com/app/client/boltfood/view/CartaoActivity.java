@@ -14,8 +14,8 @@ import com.google.firebase.auth.FirebaseUser;
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.CartaoController;
 import br.com.app.client.boltfood.model.entity.Cartao;
-import br.com.app.client.boltfood.model.entity.util.Documento;
-import br.com.app.client.boltfood.model.entity.util.Validacao;
+import br.com.app.client.boltfood.view.util.Documento;
+import br.com.app.client.boltfood.view.util.Validacao;
 
 
 public class CartaoActivity extends AppCompatActivity {
@@ -79,7 +79,6 @@ public class CartaoActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), CartaoConfirmActivity.class);
         startActivity(intent);
-
     }
 
     private boolean validaCampos(){

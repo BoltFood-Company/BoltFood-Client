@@ -40,5 +40,7 @@
     <string name="documentotitularcartao">CPF do titular do cartão</string>
 
     <string name="descricaologoapp">Logo aplicativo</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
 </resources>

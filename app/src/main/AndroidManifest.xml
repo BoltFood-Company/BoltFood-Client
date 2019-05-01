@@ -23,11 +23,10 @@
         </activity>
         <activity android:name=".view.principalActivity" />
         <activity android:name=".view.CartaoActivity" />
-        <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.ClienteActivity" />
         <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.CartaoConfirmActivity"></>
-        <activity android:name=".view.RestaurantesActivity">
+        <activity android:name=".view.CartaoConfirmActivity"/>
+        <activity android:name=".view.RestaurantesActivity"/>
     </application>
 
 </manifest>
