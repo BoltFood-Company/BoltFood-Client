@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -35,7 +36,6 @@ public class principalActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager listaManager;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static ArrayList<Restaurante> mArrayList = new ArrayList<>();
-    private static ArrayList<String> stringList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +49,6 @@ public class principalActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        stringList.add("Bar do Manuel");
-        stringList.add("Bar Da Maria");
-        stringList.add("Bar do Manuel");
-        stringList.add("Bar Da Maria");
-        stringList.add("Bar do Manuel");
-        stringList.add("Bar Da Maria");
-        stringList.add("Bar do Manuel");
-        stringList.add("Bar Da Maria");
-        stringList.add("Bar do Manuel");
-        stringList.add("Bar Da Maria");
-        stringList.add("Bar do Manuel");
-        stringList.add("Bar Da Maria");
-
         Task<QuerySnapshot> docRef = db.collection("Restaurante").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -71,7 +58,6 @@ public class principalActivity extends AppCompatActivity {
 
                         mArrayList.addAll(rest);
 
-                        Toast.makeText(getApplicationContext(), "PEGOU ALGUMA COISA AQUI", Toast.LENGTH_LONG).show();
 
                     }
                 }) .addOnFailureListener(new OnFailureListener() {
@@ -85,7 +71,7 @@ public class principalActivity extends AppCompatActivity {
 
         listaRecycler.setHasFixedSize(true);
         listaManager = new LinearLayoutManager(this);
-        listaAdapter = new MainAdapter(stringList);
+        listaAdapter = new MainAdapter(mArrayList, getApplicationContext());
         listaRecycler.setLayoutManager(listaManager);
         listaRecycler.setAdapter(listaAdapter);
 

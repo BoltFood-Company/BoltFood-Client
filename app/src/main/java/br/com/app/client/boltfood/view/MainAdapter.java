@@ -1,11 +1,20 @@
 package br.com.app.client.boltfood.view;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -14,10 +23,11 @@ import br.com.app.client.boltfood.model.entity.Restaurante;
 
 class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-    ArrayList<String> listaRestaurante;
-
-    public MainAdapter(ArrayList<String> strinList) {
-        listaRestaurante = strinList;
+    ArrayList<Restaurante> listaRestaurante;
+    Context context;
+    public MainAdapter(ArrayList<Restaurante> restauranteList, Context applicationContext) {
+        listaRestaurante = restauranteList;
+        context = applicationContext;
 
     }
 
@@ -30,7 +40,8 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MainAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.nome.setText(listaRestaurante.get(i));
+        viewHolder.nome.setText(listaRestaurante.get(i).getNomeFantasia());
+        viewHolder.descricao.setText(listaRestaurante.get(i).getDescricao());
     }
 
     @Override
@@ -41,11 +52,17 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        public TextView nome;
+        private TextView nome;
+        private TextView descricao;
+        private ImageView cardImage;
 
         public ViewHolder(@NonNull View itemView) {
+
             super(itemView);
             nome = itemView.findViewById(R.id.nomeRestaurante);
+            descricao = itemView.findViewById(R.id.descricaoRestaurante);
+            cardImage = itemView.findViewById(R.id.imageRestaurante);
+
         }
     }
 }

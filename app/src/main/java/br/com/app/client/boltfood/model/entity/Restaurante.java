@@ -14,6 +14,7 @@ public class Restaurante implements Serializable {
     private String nomeFantasia;
     private String telefone;
     private String url;
+    private String descricao;
 
     private Universidade universidade;
 
@@ -23,7 +24,7 @@ public class Restaurante implements Serializable {
 
     }
 
-    public Restaurante(Integer id, String cnpj, String razaoSocial, String nomeFantasia, String telefone, Universidade universidade, String url) {
+    public Restaurante(Integer id, String cnpj, String razaoSocial, String nomeFantasia, String telefone, Universidade universidade, String url, String descricao) {
         this.id = id;
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
@@ -31,6 +32,15 @@ public class Restaurante implements Serializable {
         this.telefone = telefone;
         this.universidade = universidade;
         this.url = url;
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public String getUrl() {
