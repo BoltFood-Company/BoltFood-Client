@@ -22,7 +22,7 @@ public class CartaoConfirmActivity extends AppCompatActivity {
         voltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PrincipalActivity.class);
+                Intent intent = new Intent(getApplicationContext(), principalActivity.class);
                 startActivity(intent);
             }
         });

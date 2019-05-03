@@ -26,11 +26,12 @@ public class Documento {
      * @param cpf
      * @return
      */
-    public static boolean isValidCPF(final String cpf) {
+    public static boolean isValidCPF(String cpf) {
+        cpf = cpf.replaceAll("-","").replaceAll(".","");
         if ((cpf == null) || (cpf.length() != 11) || cpf.matches(cpf.charAt(0) + "{11}")) return false;
 
-        final Integer digit1 = calculate(cpf.substring(0, 9), weightCpf);
-        final Integer digit2 = calculate(cpf.substring(0, 9) + digit1, weightCpf);
+        Integer digit1 = calculate(cpf.substring(0, 9), weightCpf);
+        Integer digit2 = calculate(cpf.substring(0, 9) + digit1, weightCpf);
         return cpf.equals(cpf.substring(0, 9) + digit1.toString() + digit2.toString());
     }
 

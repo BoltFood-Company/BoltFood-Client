@@ -1,10 +1,13 @@
 package br.com.app.client.boltfood.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.ClienteController;
@@ -26,6 +29,7 @@ public class ClienteActivity extends AppCompatActivity {
     private EditText confirmacaoSenhaCliente;
     private RadioButton masculino;
     private RadioButton feminino;
+    private Button btnCadastrar;
 
     private Cliente cliente;
     private ClienteController clienteController;
@@ -54,7 +58,24 @@ public class ClienteActivity extends AppCompatActivity {
 
         Mascara mascaraDocumentoCliente = new Mascara("###.###.###-##", documentoCliente);
         documentoCliente.addTextChangedListener(mascaraDocumentoCliente);
+
+        btnCadastrar = findViewById(R.id.cadastrarButton);
+
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cadastrar(v);
+
+                Toast.makeText(getApplicationContext(), "Cadastro Efetuado com Sucesso", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
     }
+
+
 
     public void cadastrar(View view) {
 
