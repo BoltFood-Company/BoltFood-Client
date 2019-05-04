@@ -1,6 +1,7 @@
 package br.com.app.client.boltfood.view;
 
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -36,6 +38,7 @@ public class principalActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager listaManager;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private static ArrayList<Restaurante> mArrayList = new ArrayList<>();
+    private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class principalActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mProgressBar = findViewById(R.id.progressCircle);
 
         Task<QuerySnapshot> docRef = db.collection("Restaurante").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -58,6 +62,14 @@ public class principalActivity extends AppCompatActivity {
 
                         mArrayList.addAll(rest);
 
+                        listaRecycler = findViewById(R.id.principalRecyclerView);
+
+                        listaRecycler.setHasFixedSize(true);
+                        listaManager = new LinearLayoutManager(getApplicationContext());
+                        listaAdapter = new MainAdapter(mArrayList, getApplicationContext());
+                        listaRecycler.setLayoutManager(listaManager);
+                        listaRecycler.setAdapter(listaAdapter);
+                        mProgressBar.setVisibility(View.INVISIBLE);
 
                     }
                 }) .addOnFailureListener(new OnFailureListener() {
@@ -67,13 +79,11 @@ public class principalActivity extends AppCompatActivity {
                     }
                 });
 
-        listaRecycler = findViewById(R.id.principalRecyclerView);
 
-        listaRecycler.setHasFixedSize(true);
-        listaManager = new LinearLayoutManager(this);
-        listaAdapter = new MainAdapter(mArrayList, getApplicationContext());
-        listaRecycler.setLayoutManager(listaManager);
-        listaRecycler.setAdapter(listaAdapter);
+
+
+
+
 
     }
 
