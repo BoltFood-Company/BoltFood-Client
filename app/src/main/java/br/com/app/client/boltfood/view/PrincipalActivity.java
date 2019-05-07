@@ -84,7 +84,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
         listaRecycler.setHasFixedSize(true);
         listaManager = new LinearLayoutManager(this);
-        listaAdapter = new MainAdapter(stringList);
+        listaAdapter = new MainAdapter(mArrayList, getApplicationContext());
         listaRecycler.setLayoutManager(listaManager);
         listaRecycler.setAdapter(listaAdapter);
 
