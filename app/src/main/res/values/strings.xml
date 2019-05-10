@@ -44,6 +44,18 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
 
+    <string name="formasdepagamento">Formas de Pagamento</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="cadastro">Cadastro</string>
+    <string name="configuraçoes">Configurações</string>
+    <string name="sair">Sair</string>
+
+    <string name="emailinvalido">E-mail inválido</string>
+    <string name="senhainvalida">Senha inválida</string>
+
+    <string name="esqueciminhasenha">Esqueci minha senha</string>
+    <string name="enviar">Enviar</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

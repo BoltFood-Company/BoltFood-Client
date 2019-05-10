@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:id="@+id/pedidos" android:title="Pedidos" android:icon="@drawable/pedido"/>
-    <item android:id="@+id/pagamento" android:title="Formas de Pagamento" android:icon="@drawable/pagamento"/>
-    <item android:id="@+id/configuracoes" android:title="Configurações" android:icon="@drawable/configuracoes"/>
-    <item android:id="@+id/sair" android:title="Sair" android:icon="@drawable/sair" />
+    <item
+        android:id="@+id/pedidos"
+        android:icon="@drawable/pedido"
+        android:title="@string/pedidos" />
+    <item
+        android:id="@+id/pagamento"
+        android:icon="@drawable/pagamento"
+        android:title="@string/formasdepagamento" />
+    <item
+        android:id="@+id/cadastroDrawerItem"
+        android:icon="@drawable/configuracoes"
+        android:title="@string/cadastro" />
+    <item
+        android:id="@+id/configuracoes"
+        android:icon="@drawable/configuracoes"
+        android:title="@string/configuraçoes" />
+    <item
+        android:id="@+id/sair"
+        android:icon="@drawable/sair"
+        android:title="@string/sair" />
 </menu>

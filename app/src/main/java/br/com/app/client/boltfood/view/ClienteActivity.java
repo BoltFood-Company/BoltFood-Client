@@ -1,13 +1,18 @@
 package br.com.app.client.boltfood.view;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.ClienteController;
@@ -29,10 +34,11 @@ public class ClienteActivity extends AppCompatActivity {
     private EditText confirmacaoSenhaCliente;
     private RadioButton masculino;
     private RadioButton feminino;
-    private Button btnCadastrar;
 
     private Cliente cliente;
     private ClienteController clienteController;
+
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,24 +64,7 @@ public class ClienteActivity extends AppCompatActivity {
 
         Mascara mascaraDocumentoCliente = new Mascara("###.###.###-##", documentoCliente);
         documentoCliente.addTextChangedListener(mascaraDocumentoCliente);
-
-        btnCadastrar = findViewById(R.id.cadastrarButton);
-
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cadastrar(v);
-
-                Toast.makeText(getApplicationContext(), "Cadastro Efetuado com Sucesso", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-
-
-            }
-        });
     }
-
-
 
     public void cadastrar(View view) {
 
@@ -85,15 +74,30 @@ public class ClienteActivity extends AppCompatActivity {
 
         cliente = new Cliente();
         cliente.setNome(nomeCliente.getText().toString());
-        cliente.setCpf(documentoCliente.getText().toString());
+        //cliente.setCpf(documentoCliente.getText().toString());
         //cliente.setDataNascimento(documentoCliente.getDa);
-        cliente.setTelefone(telefoneCliente.getText().toString());
+        //cliente.setTelefone(telefoneCliente.getText().toString());
         cliente.setEmail(emailCliente.getText().toString());
         cliente.setSenha(senhaCliente.getText().toString());
-        cliente.setSexo((masculino.isChecked() ? Sexo.MASCULINO : Sexo.FEMININO));
+        //cliente.setSexo((masculino.isChecked() ? Sexo.MASCULINO : Sexo.FEMININO));
 
-        clienteController = new ClienteController();
-        clienteController.inserirCliente(cliente);
+        auth.createUserWithEmailAndPassword(cliente.getEmail(), cliente.getSenha())
+                .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+
+                            clienteController = new ClienteController();
+                            clienteController.inserirCliente(cliente);
+
+                            Toast.makeText(getApplicationContext(), "Cadastro Efetuado com Sucesso", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent);
+                        } else {
+
+                        }
+                    }
+                });
     }
 
     private boolean validaCampos(){
@@ -103,20 +107,20 @@ public class ClienteActivity extends AppCompatActivity {
             return false;
         }
 
-        if (!Validacao.validarEditText(documentoCliente, getString(R.string.validacaodocumento))){
-            documentoCliente.requestFocus();
-            return false;
-        }
+//        if (!Validacao.validarEditText(documentoCliente, getString(R.string.validacaodocumento))){
+//            documentoCliente.requestFocus();
+//            return false;
+//        }
 
-        if (!Documento.isValidCPF(documentoCliente.getText().toString())){
-            documentoCliente.setError(getString(R.string.cpfinvalido));
-            return false;
-        }
+//        if (!Documento.isValidCPF(documentoCliente.getText().toString())){
+//            documentoCliente.setError(getString(R.string.cpfinvalido));
+//            return false;
+//        }
 
-        if (!Validacao.validarEditText(telefoneCliente, getString(R.string.validacaotelefone))){
-            telefoneCliente.requestFocus();
-            return false;
-        }
+//        if (!Validacao.validarEditText(telefoneCliente, getString(R.string.validacaotelefone))){
+//            telefoneCliente.requestFocus();
+//            return false;
+//        }
 
         if (!Validacao.validarEditText(emailCliente, getString(R.string.validacaoemail))){
             emailCliente.requestFocus();

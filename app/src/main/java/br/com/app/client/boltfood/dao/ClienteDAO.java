@@ -20,18 +20,6 @@ public class ClienteDAO {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void inserirCliente(final Cliente cliente) {
-
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(cliente.getEmail(), cliente.getSenha())
-                .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            cliente.setId(task.getResult().getUser().getUid());
-                            db.collection("Cliente").add(cliente);
-                        } else {
-                        }
-                    }
-                });
+        db.collection("Cliente").add(cliente);
     }
 }
