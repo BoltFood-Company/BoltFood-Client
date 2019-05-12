@@ -3,16 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer"
+    android:id="@+id/drawerProdutos"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.PrincipalActivity">
+    tools:context=".view.ProdutosActivity">
 
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/flcontent">
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/produtosflcontent">
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,27 +20,27 @@
         android:background="@color/white">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/principalRecyclerView"
+            android:id="@+id/produtosRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
 
-<RelativeLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <ProgressBar
-        android:id="@+id/progressCircle"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_centerInParent="true" />
+        <ProgressBar
+            android:id="@+id/progressCircleProdutos"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerInParent="true" />
 
-</RelativeLayout>
+    </RelativeLayout>
 
 
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
-        android:id="@+id/navigationView"
+        android:id="@+id/navigationViewProdutos"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white"
@@ -49,11 +49,7 @@
         app:itemTextColor="@color/darkgray"
         app:menu="@menu/drawermenu">
 
-
-
     </android.support.design.widget.NavigationView>
-
-
 
 </android.support.v4.widget.DrawerLayout>
 
