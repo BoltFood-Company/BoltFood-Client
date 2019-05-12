@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,14 +36,14 @@ public class ResetSenhaActivity extends AppCompatActivity {
             return;
         }
 
-
         auth.sendPasswordResetEmail(email.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), getString(R.string.emailenviadocomsucesso), Toast.LENGTH_LONG).show();
                     finish();
                 } else {
-
+                    Toast.makeText(getApplicationContext(), getString(R.string.emailnaoenviado), Toast.LENGTH_LONG).show();
                 }
             }
         });
