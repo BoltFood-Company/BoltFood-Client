@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 abrirTelaLogin();
             }
-        }, 3000);
+        }, 500);
     }
 
     private void abrirTelaLogin() {

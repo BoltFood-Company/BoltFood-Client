@@ -1,6 +1,7 @@
 package br.com.app.client.boltfood.model.entity;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,10 +11,11 @@ import java.util.Set;
 public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private String id;
     private String nome;
     private String descricao;
-    private Double preco;
+    private String url;
+    private long preco;
     private Integer quantidade;
 
     private Restaurante restaurante;
@@ -24,13 +26,14 @@ public class Produto implements Serializable {
 
     }
 
-    public Produto(Integer id, String nome, String descricao, Double preco, Integer quantidade, Restaurante restaurante) {
+    public Produto(String id, String nome, String descricao, long preco, Integer quantidade, Restaurante restaurante, String url) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.quantidade = quantidade;
         this.restaurante = restaurante;
+        this.url = url;
     }
 
     public List<Pedido> getPedidos() {
@@ -41,11 +44,19 @@ public class Produto implements Serializable {
         return pedidos;
     }
 
-    public Integer getId() {
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -65,11 +76,12 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
 
-    public Double getPreco() {
-        return preco;
+    public String getPreco() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance();
+        return nf.format(preco);
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(long preco) {
         this.preco = preco;
     }
 

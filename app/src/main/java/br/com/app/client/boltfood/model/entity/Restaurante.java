@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Restaurante implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private String id;
     private String cnpj;
     private String razaoSocial;
     private String nomeFantasia;
@@ -24,7 +24,7 @@ public class Restaurante implements Serializable {
 
     }
 
-    public Restaurante(Integer id, String cnpj, String razaoSocial, String nomeFantasia, String telefone, Universidade universidade, String url, String descricao) {
+    public Restaurante(String id, String cnpj, String razaoSocial, String nomeFantasia, String telefone, Universidade universidade, String url, String descricao) {
         this.id = id;
         this.cnpj = cnpj;
         this.razaoSocial = razaoSocial;
@@ -51,11 +51,11 @@ public class Restaurante implements Serializable {
         this.url = url;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
