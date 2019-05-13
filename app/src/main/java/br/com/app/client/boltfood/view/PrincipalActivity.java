@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.support.v7.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -32,8 +33,6 @@ import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.PrincipalController;
 import br.com.app.client.boltfood.controller.RestauranteHolder;
 import br.com.app.client.boltfood.model.entity.Restaurante;
-
-import static android.provider.BaseColumns._ID;
 
 public class PrincipalActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
@@ -52,10 +51,14 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
     private SearchView searchView;
     private FirestoreRecyclerAdapter<Restaurante, RestauranteHolder> adapter;
 
+    private FrameLayout frameLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
+        frameLayout = findViewById(R.id.flcontent);
 
         nvDrawer = findViewById(R.id.navigationView);
         mDrawerLayout = findViewById(R.id.drawer);

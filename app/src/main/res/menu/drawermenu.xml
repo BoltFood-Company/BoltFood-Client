@@ -13,7 +13,7 @@
         android:icon="@drawable/configuracoes"
         android:title="@string/cadastro" />
     <item
-        android:id="@+id/configuracoes"
+        android:id="@+id/configuracoesDrawerItem"
         android:icon="@drawable/configuracoes"
         android:title="@string/configuraçoes" />
     <item

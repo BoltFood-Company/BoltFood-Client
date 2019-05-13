@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                             user = auth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(), PrincipalActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), PrincipalNavigationActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
