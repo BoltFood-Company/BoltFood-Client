@@ -56,18 +56,6 @@
     <string name="esqueciminhasenha">Esqueci minha senha</string>
     <string name="enviar">Enviar</string>
 
-    <string name="recuperacaodesenha">Recuperação de Senha</string>
-    <string name="receberemailverificacao">Receber um e-mail para alteração de senha.</string>
-    <string name="texto1descricaorecuperacao">Para receber um e-mail de alteração da sua senha, confirme aqui o seu endereço de e-mail.</string>
-    <string name="texto2descricaorecuperacao">Em seguida, aguarde um momento e verifique sua caixa de entrada, caso você não receba, verifique a sua caixa de spam.</string>
-    <string name="texto3descricaorecuperacao">Caso não tenha recebido o e-mail, tente novamente.</string>
-
-    <string name="emailenviadocomsucesso">E-mail enviado com sucesso!</string>
-    <string name="emailnaoenviado">Algo deu errado. Tente novamente.</string>
-
-    <string name="cadastroefetuadocomsucesso">Cadastro efetuado com suceso!</string>
-    <string name="usuarionaocadastrado">Usuário não cadastrado. Tente novamente!</string>
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_principal_navigation">PrincipalNavigationActivity</string>
