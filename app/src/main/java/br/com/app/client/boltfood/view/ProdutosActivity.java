@@ -66,8 +66,10 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(nvDrawer);
+
         progressBar = findViewById(R.id.progressCircleProdutos);
 
         controller = new PrincipalController();
@@ -79,6 +81,11 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
 
         if(extras != null) {
             String idRestaurante = (String) extras.get("idRestaurante");
+            String nomeRestaurante = (String) extras.get("nomeRestaurante");
+            String notaRestaurante = (String) extras.get("notaRestaurante");
+            String imagemRestaurante = (String) extras.get("imagemRestaurante");
+            String bgRestaurante = (String) extras.get("bgRestaurante");
+
             ref = db.document("Restaurante/" + idRestaurante);
         }
 
