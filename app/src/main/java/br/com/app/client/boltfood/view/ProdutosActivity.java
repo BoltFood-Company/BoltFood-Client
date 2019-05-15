@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import org.w3c.dom.Comment;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.PrincipalController;
@@ -181,33 +184,35 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
             @NonNull
             @Override
             public ProdutosHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.produto_card_layout, viewGroup, false);
-                final ProdutosHolder viewHolder = new ProdutosHolder(view);
-                progressBar.setVisibility(View.INVISIBLE);
-                viewHolder.setOnClickListener(new ProdutosHolder.ClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        String id = adapter.getItem(position).getId();
-                        Toast.makeText(ProdutosActivity.this, id, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), ProdutoActivity.class);
-                        intent.putExtra("idProduto",id);
-                        startActivity(intent);
 
-                    }
+                    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.produto_card_layout, viewGroup, false);
+                    final ProdutosHolder viewHolder = new ProdutosHolder(view);
 
-                    @Override
-                    public void onItemLongClick(View view, int position) {
-                        String id = adapter.getItem(position).getId();
-                        Toast.makeText(ProdutosActivity.this, id, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
-                        intent.putExtra("idProduto",id);
-                        startActivity(intent);
+                    progressBar.setVisibility(View.INVISIBLE);
 
-                    }
-                });
+                    viewHolder.setOnClickListener(new ProdutosHolder.ClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            String id = adapter.getItem(position).getId();
+                            Toast.makeText(ProdutosActivity.this, id, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), ProdutoActivity.class);
+                            intent.putExtra("idProduto",id);
+                            startActivity(intent);
 
-                return viewHolder;
+                        }
 
+                        @Override
+                        public void onItemLongClick(View view, int position) {
+                            String id = adapter.getItem(position).getId();
+                            Toast.makeText(ProdutosActivity.this, id, Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
+                            intent.putExtra("idProduto",id);
+                            startActivity(intent);
+
+                        }
+                    });
+
+                    return viewHolder;
 
             }
 
