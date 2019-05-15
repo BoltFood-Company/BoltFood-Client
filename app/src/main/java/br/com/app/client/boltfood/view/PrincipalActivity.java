@@ -186,6 +186,11 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                     @Override
                     public void onItemClick(View view, int position) {
                         String id = adapter.getItem(position).getId();
+                        String nomeRestaurante = adapter.getItem(position).getNomeFantasia();
+                        String notaRestaurante = adapter.getItem(position).getNota();
+                        String imagemRestaurante = adapter.getItem(position).getUrl();
+                        String bgRestaurante = adapter.getItem(position).getBgUrl();
+
                         Toast.makeText(PrincipalActivity.this, id, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
                         intent.putExtra("idRestaurante",id);

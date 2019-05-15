@@ -16,6 +16,7 @@ public class Restaurante implements Serializable {
     private String url;
     private String descricao;
     private String nota;
+    private String bgUrl;
 
     private Universidade universidade;
 
@@ -35,7 +36,12 @@ public class Restaurante implements Serializable {
         this.url = url;
         this.descricao = descricao;
         this.nota = nota;
+        this.bgUrl = bgUrl;
     }
+
+    public String getBgUrl() {return bgUrl;}
+
+    public void setBgUrl(String bgUrl) {this.bgUrl = bgUrl;}
 
     public String getNota() {return nota;}
 
