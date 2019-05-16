@@ -189,9 +189,9 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                         String nomeRestaurante = adapter.getItem(position).getNomeFantasia();
                         String notaRestaurante = adapter.getItem(position).getNota();
                         String imagemRestaurante = adapter.getItem(position).getUrl();
-                        String bgRestaurante = adapter.getItem(position).getBgUrl();
+                        String bgRestaurante = adapter.getItem(position).geturlBg();
 
-                        Toast.makeText(PrincipalActivity.this, id, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PrincipalActivity.this, bgRestaurante, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
 
                         intent.putExtra("idRestaurante",id);
@@ -210,7 +210,7 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                         String nomeRestaurante = adapter.getItem(position).getNomeFantasia();
                         String notaRestaurante = adapter.getItem(position).getNota();
                         String imagemRestaurante = adapter.getItem(position).getUrl();
-                        String bgRestaurante = adapter.getItem(position).getBgUrl();
+                        String bgRestaurante = adapter.getItem(position).geturlBg();
 
                         Toast.makeText(PrincipalActivity.this, id, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);

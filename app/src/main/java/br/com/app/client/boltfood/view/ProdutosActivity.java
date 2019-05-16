@@ -18,9 +18,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,6 +60,13 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
     private FirestoreRecyclerAdapter<Produto, ProdutosHolder> adapter;
     private DocumentReference ref = db.document("");
 
+    private TextView headerNome;
+    private TextView headerEstrela;
+    private ImageView headerImagem;
+    private ImageView headerBg;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +88,11 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
         listaRecycler = findViewById(R.id.produtosRecyclerView);
         listaRecycler.setLayoutManager(new LinearLayoutManager(this));
 
+        headerNome = findViewById(R.id.restauranteNomeHeader);
+        headerEstrela = findViewById(R.id.restauranteEstrelaHeader);
+        headerImagem = findViewById(R.id.restauranteImageHeader);
+        headerBg = findViewById(R.id.restauranteHeaderBg);
+
         Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
@@ -87,7 +103,15 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
             String bgRestaurante = (String) extras.get("bgRestaurante");
 
             ref = db.document("Restaurante/" + idRestaurante);
+
+            headerNome.setText(nomeRestaurante);
+            headerEstrela.setText(notaRestaurante);
+            Toast.makeText(this, bgRestaurante, Toast.LENGTH_SHORT).show();
+            Glide.with(getApplicationContext()).load(imagemRestaurante).into(headerImagem);
+            Glide.with(getApplicationContext()).load(bgRestaurante).into(headerBg);
+
         }
+
 
         query = db.collection("Produto").whereEqualTo("idRestaurante", ref);
 
