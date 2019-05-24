@@ -28,10 +28,8 @@
             android:orientation="vertical">
 
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <LinearLayout
                 android:orientation="vertical"
-                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="155dp"
                 android:id="@+id/restauranteHeader"
@@ -80,7 +78,7 @@
                     android:textSize="18dp"
                     android:id="@+id/restauranteNomeHeader"
                     android:text="Nome de Restaurante"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/darkgray"
                     android:textStyle="bold"
                     tools:ignore="MissingConstraints" />
 
