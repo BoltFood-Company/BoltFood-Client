@@ -4,6 +4,7 @@ package br.com.app.client.boltfood.view;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,10 @@ public class CartaoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cartao);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Cadastro de Cartão");
+
         numeroCartao = findViewById(R.id.numeroCartaoEditText);
 
         validadeMes = findViewById(R.id.validadeMesEditText);
@@ -58,6 +63,14 @@ public class CartaoActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void Cadastrar(View view) {
         if (!validaCampos()) {
             return;
@@ -65,6 +78,7 @@ public class CartaoActivity extends AppCompatActivity {
         final FirebaseUser currentUser = auth.getCurrentUser();
 
         cartao = new Cartao();
+
 
         cartao.setNumeroCartao(numeroCartao.getText().toString());
         cartao.setAno(validadeAno.getText().toString());
@@ -113,10 +127,10 @@ public class CartaoActivity extends AppCompatActivity {
             return false;
         }
 
-        if (!Documento.isValidCPF(cpfTitular.getText().toString())){
-            cpfTitular.setError(getString(R.string.cpfinvalido));
-            return false;
-        }
+//        if (!Documento.isValidCPF(cpfTitular.getText().toString())){
+//            cpfTitular.setError(getString(R.string.cpfinvalido));
+//            return false;
+//        }
 
         return true;
 

@@ -46,10 +46,6 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    private DrawerLayout mDrawerLayout ;
-    private ActionBarDrawerToggle mToggle;
-    private NavigationView nvDrawer;
-
     private RecyclerView listaRecycler;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -66,20 +62,15 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
     private ImageView headerBg;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_produtos);
 
-        nvDrawer = findViewById(R.id.navigationViewProdutos);
-        mDrawerLayout = findViewById(R.id.drawerProdutos);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setupDrawerContent(nvDrawer);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Refeições");
 
         progressBar = findViewById(R.id.progressCircleProdutos);
 
@@ -91,7 +82,6 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
         headerNome = findViewById(R.id.restauranteNomeHeader);
         headerEstrela = findViewById(R.id.restauranteEstrelaHeader);
         headerImagem = findViewById(R.id.restauranteImageHeader);
-        headerBg = findViewById(R.id.restauranteHeaderBg);
 
         Bundle extras = getIntent().getExtras();
 
@@ -108,7 +98,7 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
             headerEstrela.setText(notaRestaurante);
             Toast.makeText(this, bgRestaurante, Toast.LENGTH_SHORT).show();
             Glide.with(getApplicationContext()).load(imagemRestaurante).into(headerImagem);
-            Glide.with(getApplicationContext()).load(bgRestaurante).into(headerBg);
+//            Glide.with(getApplicationContext()).load(bgRestaurante).into(headerBg);
 
         }
 
@@ -120,41 +110,14 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
         adapter.startListening();
 
     }
-    public void selectItemDrawer(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.pagamento:
-                Intent intentFormasPagamento = new Intent(getApplicationContext(), CartaoActivity.class);
-                startActivity(intentFormasPagamento);
-                break;
 
-            case R.id.sair:
-                auth.signOut();
-                Intent intentLogin = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intentLogin);
-                finish();
-                break;
 
-            default:
-                break;
-        }
-        menuItem.setChecked(true);
-        mDrawerLayout.closeDrawers();
-    }
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                selectItemDrawer(menuItem);
-                return true;
-            }
-        });
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.onOptionsItemSelected(item)){
-            return true;
+        if(item.getItemId() == android.R.id.home){
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

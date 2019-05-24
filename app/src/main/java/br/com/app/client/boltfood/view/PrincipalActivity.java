@@ -58,6 +58,8 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+
+        getSupportActionBar().setTitle("Restaurantes");
         frameLayout = findViewById(R.id.flcontent);
 
         nvDrawer = findViewById(R.id.navigationView);
