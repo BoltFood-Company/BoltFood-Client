@@ -87,6 +87,7 @@ public class ClienteActivity extends AppCompatActivity {
         cliente.setTelefone(telefoneCliente.getText().toString());
         cliente.setEmail(emailCliente.getText().toString());
         cliente.setSenha(senhaCliente.getText().toString());
+        cliente.setId(auth.getUid());
         //cliente.setSexo((masculino.isChecked() ? Sexo.MASCULINO : Sexo.FEMININO));
 
         auth.createUserWithEmailAndPassword(cliente.getEmail(), cliente.getSenha())

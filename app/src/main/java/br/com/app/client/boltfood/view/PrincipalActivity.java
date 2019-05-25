@@ -67,6 +67,7 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(nvDrawer);
         progressBar = findViewById(R.id.progressCircle);
@@ -96,6 +97,11 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                 Intent intentLogin = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intentLogin);
                 finish();
+                break;
+
+            case R.id.pedidos:
+                Intent intentPedidos = new Intent(getApplicationContext(), HistoricoPedidosActivity.class);
+                startActivity(intentPedidos);
                 break;
 
                 default:
@@ -184,6 +190,7 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                 View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.restaurante_card_layout, viewGroup, false);
                 final RestauranteHolder viewHolder = new RestauranteHolder(view);
                 progressBar.setVisibility(View.INVISIBLE);
+
                 viewHolder.setOnClickListener(new RestauranteHolder.ClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
@@ -193,7 +200,7 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                         String imagemRestaurante = adapter.getItem(position).getUrl();
                         String bgRestaurante = adapter.getItem(position).geturlBg();
 
-                        Toast.makeText(PrincipalActivity.this, bgRestaurante, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PrincipalActivity.this, id, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
 
                         intent.putExtra("idRestaurante",id);

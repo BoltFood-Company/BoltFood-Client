@@ -112,8 +112,6 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
             headerEstrela.setText(notaRestaurante);
             Toast.makeText(this, bgRestaurante, Toast.LENGTH_SHORT).show();
             Glide.with(getApplicationContext()).load(imagemRestaurante).into(headerImagem);
-//            Glide.with(getApplicationContext()).load(bgRestaurante).into(headerBg);
-
             Glide.with(this).load(bgRestaurante).into(new SimpleTarget<Drawable>() {
                 @Override
                 public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {

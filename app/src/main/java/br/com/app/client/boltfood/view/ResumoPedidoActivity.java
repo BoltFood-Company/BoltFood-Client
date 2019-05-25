@@ -6,17 +6,25 @@ import android.view.MenuItem;
 
 import br.com.app.client.boltfood.R;
 
-public class ProdutoActivity extends AppCompatActivity {
+public class ResumoPedidoActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_produto);
+        setContentView(R.layout.activity_resumo_pedido);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Produto");
+        getSupportActionBar().setTitle("Pedido");
 
+        Bundle extras = getIntent().getExtras();
+
+        if(extras != null) {
+            String idPedido = (String) extras.get("idPedido");
+            String nomeRestaurante = (String) extras.get("nomeRestaurante");
+            String urlRestaurante = (String) extras.get("urlRestaurante");
+            String totalPedido = (String) extras.get("totalPedido");
+        }
     }
 
     @Override
