@@ -30,6 +30,7 @@ import com.google.protobuf.StringValue;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import br.com.app.client.boltfood.R;
@@ -38,6 +39,7 @@ import br.com.app.client.boltfood.controller.HistoricoPedidoHolder;
 import br.com.app.client.boltfood.controller.RestauranteHolder;
 import br.com.app.client.boltfood.model.entity.Cliente;
 import br.com.app.client.boltfood.model.entity.Pedido;
+import br.com.app.client.boltfood.model.entity.Produto;
 import br.com.app.client.boltfood.model.entity.Restaurante;
 
 public class HistoricoPedidosActivity extends AppCompatActivity {
@@ -133,16 +135,17 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
                     public void onItemClick(View view, int position) {
                         String id = adapter.getItem(position).getId();
                         String total = adapter.getItem(position).getTotalPedido();
+                        long numeroPedido = adapter.getItem(position).getNumeroPedido();
 
-                        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
+
                         Intent intent = new Intent(getApplicationContext(), ResumoPedidoActivity.class);
 
                         intent.putExtra("idPedido",id);
+                        intent.putExtra("numeroPedido", numeroPedido);
                         intent.putExtra("nomeRestaurante", nomeRestaurante);
                         intent.putExtra("urlRestaurante", imagemRestaurante);
                         intent.putExtra("totalPedido", total);
 
-                        Toast.makeText(HistoricoPedidosActivity.this, id, Toast.LENGTH_SHORT).show();
                         startActivity(intent);
 
                     }
