@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.AlteracaoClienteActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.AlteracaoClienteActivity">
+
+        <EditText
+            android:id="@+id/nomeAlteracaoClienteEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/nome"
+            android:inputType="textPersonName"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/documentoAlteracaoEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/cpf"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/nomeAlteracaoClienteEditText"
+            app:layout_constraintStart_toStartOf="@+id/nomeAlteracaoClienteEditText"
+            app:layout_constraintTop_toBottomOf="@+id/nomeAlteracaoClienteEditText"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/dataNascimentoAlteracaoEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/datanascimento"
+            android:inputType="date"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/documentoAlteracaoEditText"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/documentoAlteracaoEditText"
+            app:layout_constraintTop_toBottomOf="@+id/documentoAlteracaoEditText"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/telefoneAlteracaoEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            android:hint="@string/telefone"
+            android:inputType="phone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/documentoAlteracaoEditText"
+            app:layout_constraintStart_toStartOf="@+id/dataNascimentoAlteracaoEditText"
+            app:layout_constraintTop_toBottomOf="@+id/dataNascimentoAlteracaoEditText"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Spinner
+            android:id="@+id/sexoAlteracaoClienteSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/colorPrimaryLigth"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/telefoneAlteracaoEditText"
+            app:layout_constraintStart_toStartOf="@+id/telefoneAlteracaoEditText"
+            app:layout_constraintTop_toBottomOf="@+id/telefoneAlteracaoEditText"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/salvarButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/salvar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/sexoAlteracaoClienteSpinner"
+            app:layout_constraintStart_toStartOf="@+id/sexoAlteracaoClienteSpinner"
+            app:layout_constraintTop_toBottomOf="@+id/sexoAlteracaoClienteSpinner"
+            tools:text="@string/salvar" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

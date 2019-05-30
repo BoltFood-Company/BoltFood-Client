@@ -104,6 +104,11 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                 startActivity(intentPedidos);
                 break;
 
+            case R.id.cadastroDrawerItem:
+                Intent intentCadastro = new Intent(getApplicationContext(), AlteracaoClienteActivity.class);
+                startActivity(intentCadastro);
+                break;
+
                 default:
                     break;
         }

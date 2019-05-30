@@ -14,8 +14,8 @@ public class Cliente implements Serializable {
     private String id;
     private String nome;
     private String cpf;
-    private Date dataNascimento;
-    private Integer sexo;
+    private String dataNascimento;
+    private String sexo;
     private String telefone;
     private String email;
     private String senha;
@@ -26,12 +26,12 @@ public class Cliente implements Serializable {
 
     }
 
-    public Cliente(String id, String nome, String cpf, Date dataNascimento, Sexo sexo, String telefone, String email, String senha) {
+    public Cliente(String id, String nome, String cpf, String dataNascimento, String sexo, String telefone, String email, String senha) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
-        this.sexo = sexo.getCodigo();
+        this.sexo = sexo;
         this.telefone = telefone;
         this.email = email;
         this.senha = senha;
@@ -62,20 +62,20 @@ public class Cliente implements Serializable {
         this.cpf = cpf;
     }
 
-    public Date getDataNascimento() {
+    public String getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
-    public Sexo getSexo() {
-        return Sexo.toEnum(sexo);
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo.getCodigo();
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public String getTelefone() {

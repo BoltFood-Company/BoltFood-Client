@@ -1,14 +1,17 @@
 package br.com.app.client.boltfood.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -83,12 +86,12 @@ public class ClienteActivity extends AppCompatActivity {
         cliente = new Cliente();
         cliente.setNome(nomeCliente.getText().toString());
         cliente.setCpf(documentoCliente.getText().toString());
-        //cliente.setDataNascimento(documentoCliente.getDa);
+        cliente.setDataNascimento(dataNascimentoCliente.getText().toString());
         cliente.setTelefone(telefoneCliente.getText().toString());
         cliente.setEmail(emailCliente.getText().toString());
         cliente.setSenha(senhaCliente.getText().toString());
         cliente.setId(auth.getUid());
-        //cliente.setSexo((masculino.isChecked() ? Sexo.MASCULINO : Sexo.FEMININO));
+        cliente.setSexo(sexoCliente.getSelectedItem().toString());
 
         auth.createUserWithEmailAndPassword(cliente.getEmail(), cliente.getSenha())
                 .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
@@ -162,7 +165,30 @@ public class ClienteActivity extends AppCompatActivity {
         List<String> plantsList = new ArrayList<>(Arrays.asList(sexos));
 
         ArrayAdapter<String> sexoSpinnerArrayAdapter = new ArrayAdapter<String>(
-                getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, plantsList);
+                getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, plantsList){
+
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
 
         sexoSpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         sexoCliente.setAdapter(sexoSpinnerArrayAdapter);

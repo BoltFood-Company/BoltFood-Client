@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ResumoPedidoActivity"></activity>
+        <activity android:name=".view.AlteracaoClienteActivity"></activity>
+        <activity android:name=".view.ResumoPedidoActivity" />
         <activity android:name=".view.HistoricoPedidosActivity" />
         <activity android:name=".view.SplashActivity">
             <intent-filter>
