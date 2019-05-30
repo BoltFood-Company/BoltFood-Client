@@ -41,6 +41,8 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
     private EditText dataNascimento;
     private Spinner sexo;
 
+    private String idDocumentCliente = "";
+
     private final String[] sexos = new String[] { "Selecione", "Masculilno", "Feminino", "Outro" };
 
     @Override
@@ -85,6 +87,7 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                idDocumentCliente = document.getId();
                                 Cliente cliente = document.toObject(Cliente.class);
 
                                 if (cliente.getNome() != null && !cliente.getNome().equals(""))

@@ -22,6 +22,16 @@ public class Pedido implements Serializable {
     private long totalPedido;
     private long numeroPedido;
 
+    public List<br.com.app.client.boltfood.model.entity.PedidoItem> getPedidoItem() {
+        return PedidoItem;
+    }
+
+    public void setPedidoItem(List<br.com.app.client.boltfood.model.entity.PedidoItem> pedidoItem) {
+        PedidoItem = pedidoItem;
+    }
+
+    private List<PedidoItem> PedidoItem;
+
     public Pedido() {
 
     }

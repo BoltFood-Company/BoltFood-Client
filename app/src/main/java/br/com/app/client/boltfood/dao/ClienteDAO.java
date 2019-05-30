@@ -22,4 +22,8 @@ public class ClienteDAO {
     public void inserirCliente(final Cliente cliente) {
         db.collection("Cliente").add(cliente);
     }
+
+    public void alterarCliente(String idDocument, Cliente cliente) {
+        db.collection("Cliente").document(idDocument).update("", cliente.getCpf());
+    }
 }
