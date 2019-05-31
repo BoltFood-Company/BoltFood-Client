@@ -19,18 +19,10 @@ public class Pedido implements Serializable {
     private Date data;
     private String idcliente;
     private DocumentReference idRestaurante;
+    private List<Produto> PedidoItem;
     private long totalPedido;
     private long numeroPedido;
 
-    public List<br.com.app.client.boltfood.model.entity.PedidoItem> getPedidoItem() {
-        return PedidoItem;
-    }
-
-    public void setPedidoItem(List<br.com.app.client.boltfood.model.entity.PedidoItem> pedidoItem) {
-        PedidoItem = pedidoItem;
-    }
-
-    private List<PedidoItem> PedidoItem;
 
     public Pedido() {
 
@@ -45,6 +37,13 @@ public class Pedido implements Serializable {
         this.idRestaurante = idRestaurante;
     }
 
+    public List<Produto> getPedidoItem() {
+        return PedidoItem;
+    }
+
+    public void setPedidoItem(List<Produto> pedidoItem) {
+        PedidoItem = pedidoItem;
+    }
 
     public DocumentReference getIdRestaurante() {
         return idRestaurante;

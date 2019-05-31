@@ -16,7 +16,7 @@ public class Produto implements Serializable {
     private String descricao;
     private String url;
     private long preco;
-    private Integer quantidade;
+    private long qtdeEstoque;
 
     private Restaurante restaurante;
 
@@ -31,7 +31,7 @@ public class Produto implements Serializable {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
-        this.quantidade = quantidade;
+        this.qtdeEstoque = qtdeEstoque;
         this.restaurante = restaurante;
         this.url = url;
     }
@@ -85,12 +85,12 @@ public class Produto implements Serializable {
         this.preco = preco;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    public long getQtdeEstoque() {
+        return qtdeEstoque;
     }
 
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
+    public void setQtdeEstoque(long qtdeEstoque) {
+        this.qtdeEstoque = qtdeEstoque;
     }
 
     public Restaurante getRestaurante() {

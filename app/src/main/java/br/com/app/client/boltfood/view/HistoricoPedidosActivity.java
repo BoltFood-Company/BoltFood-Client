@@ -67,7 +67,6 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBarHistoricoPedidos);
 
         historicoPedidoRecycler.setLayoutManager(new LinearLayoutManager(this));
-        Toast.makeText(this, auth.getUid(), Toast.LENGTH_SHORT).show();
         query = db.collection("Pedido").whereEqualTo("idCliente", auth.getUid());
         adapter = setAdapter(query);
         historicoPedidoRecycler.setAdapter(adapter);

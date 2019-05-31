@@ -110,7 +110,6 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
 
             headerNome.setText(nomeRestaurante);
             headerEstrela.setText(notaRestaurante);
-            Toast.makeText(this, bgRestaurante, Toast.LENGTH_SHORT).show();
             Glide.with(getApplicationContext()).load(imagemRestaurante).into(headerImagem);
             Glide.with(this).load(bgRestaurante).into(new SimpleTarget<Drawable>() {
                 @Override
@@ -121,7 +120,6 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
                 }
             });
         }
-
 
         query = db.collection("Produto").whereEqualTo("idRestaurante", ref);
 
