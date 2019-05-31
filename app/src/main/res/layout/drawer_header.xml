@@ -13,18 +13,20 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         tools:ignore="MissingConstraints" />
+
     <TextView
+        android:id="@+id/nomeUsuarioTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome de Usuário"
+        android:layout_marginTop="5dp"
         android:textColor="@color/darkgray"
         android:textStyle="bold"
-        android:layout_marginTop="5dp"
         tools:ignore="MissingConstraints" />
+
     <TextView
+        android:id="@+id/emailUsuarioTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="bolt@gmail.com"
         android:textColor="@color/darkgray"
         tools:ignore="MissingConstraints" />
 

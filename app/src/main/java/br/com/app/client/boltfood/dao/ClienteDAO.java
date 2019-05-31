@@ -23,7 +23,16 @@ public class ClienteDAO {
         db.collection("Cliente").add(cliente);
     }
 
-    public void alterarCliente(String idDocument, Cliente cliente) {
-        db.collection("Cliente").document(idDocument).update("", cliente.getCpf());
+    public int alterarCliente(String idDocument, Cliente cliente) {
+
+        try {
+            db.collection("Cliente").document(idDocument).update("cpf", cliente.getCpf(), "dataNascimento", cliente.getDataNascimento(),
+                    "nome", cliente.getNome(), "sexo", cliente.getSexo(), "telefone", cliente.getTelefone());
+
+            return 1;
+
+        } catch (Exception ex) {
+            return 0;
+        }
     }
 }

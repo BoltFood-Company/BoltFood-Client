@@ -20,18 +20,24 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.support.v7.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.PrincipalController;
 import br.com.app.client.boltfood.controller.RestauranteHolder;
+import br.com.app.client.boltfood.model.entity.Cliente;
 import br.com.app.client.boltfood.model.entity.Restaurante;
 
 public class PrincipalActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
@@ -51,13 +57,14 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
     private SearchView searchView;
     private FirestoreRecyclerAdapter<Restaurante, RestauranteHolder> adapter;
 
+    private TextView nomeUsuario, emailUsuario;
+
     private FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-
 
         getSupportActionBar().setTitle("Restaurantes");
         frameLayout = findViewById(R.id.flcontent);
@@ -72,6 +79,11 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         setupDrawerContent(nvDrawer);
         progressBar = findViewById(R.id.progressCircle);
 
+        nomeUsuario = nvDrawer.getHeaderView(0).findViewById(R.id.nomeUsuarioTextView);
+        emailUsuario = nvDrawer.getHeaderView(0).findViewById(R.id.emailUsuarioTextView);
+
+        carregaCliente();
+
         controller = new PrincipalController();
 
         listaRecycler = findViewById(R.id.principalRecyclerView);
@@ -82,7 +94,13 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         adapter = setAdapter(query);
         listaRecycler.setAdapter(adapter);
         adapter.startListening();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        carregaCliente();
     }
 
     public void selectItemDrawer(MenuItem menuItem) {
@@ -126,12 +144,12 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         });
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item)){
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -162,7 +180,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                 .hideSoftInputFromWindow(searchView.getWindowToken(), 0);
         return true;
     }
-
 
     @Override
     public boolean onQueryTextChange(String q) {
@@ -215,7 +232,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                         intent.putExtra("bgRestaurante", bgRestaurante);
 
                         startActivity(intent);
-
                     }
 
                     @Override
@@ -236,13 +252,10 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                         intent.putExtra("imagemRestaurante", imagemRestaurante);
                         intent.putExtra("bgRestaurante", bgRestaurante);
                         startActivity(intent);
-
                     }
                 });
 
                 return viewHolder;
-
-
             }
 
             @Override
@@ -263,4 +276,22 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
 
     }
 
+    private void carregaCliente(){
+        db.collection("Cliente")
+                .whereEqualTo("id", auth.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Cliente cliente = document.toObject(Cliente.class);
+
+                                emailUsuario.setText(cliente.getEmail());
+                                nomeUsuario.setText(cliente.getNome());
+                            }
+                        }
+                    }
+                });
+    }
 }

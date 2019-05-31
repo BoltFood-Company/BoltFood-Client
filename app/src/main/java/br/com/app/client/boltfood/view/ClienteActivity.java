@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -83,21 +84,21 @@ public class ClienteActivity extends AppCompatActivity {
             return;
         }
 
-        cliente = new Cliente();
-        cliente.setNome(nomeCliente.getText().toString());
-        cliente.setCpf(documentoCliente.getText().toString());
-        cliente.setDataNascimento(dataNascimentoCliente.getText().toString());
-        cliente.setTelefone(telefoneCliente.getText().toString());
-        cliente.setEmail(emailCliente.getText().toString());
-        cliente.setSenha(senhaCliente.getText().toString());
-        cliente.setId(auth.getUid());
-        cliente.setSexo(sexoCliente.getSelectedItem().toString());
-
-        auth.createUserWithEmailAndPassword(cliente.getEmail(), cliente.getSenha())
+        auth.createUserWithEmailAndPassword(emailCliente.getText().toString(), senhaCliente.getText().toString())
                 .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+                            cliente = new Cliente();
+                            cliente.setNome(nomeCliente.getText().toString());
+                            cliente.setCpf(documentoCliente.getText().toString());
+                            cliente.setDataNascimento(dataNascimentoCliente.getText().toString());
+                            cliente.setTelefone(telefoneCliente.getText().toString());
+                            cliente.setEmail(emailCliente.getText().toString());
+                            cliente.setSenha(senhaCliente.getText().toString());
+                            cliente.setId(auth.getUid());
+                            cliente.setSexo(sexoCliente.getSelectedItem().toString());
 
                             clienteController = new ClienteController();
                             clienteController.inserirCliente(cliente);
@@ -130,17 +131,18 @@ public class ClienteActivity extends AppCompatActivity {
 //            return false;
 //        }
 
-//        if (!Validacao.validarEditText(telefoneCliente, getString(R.string.validacaotelefone))){
-//            telefoneCliente.requestFocus();
-//            return false;
-//        }
-
         if (!Validacao.validarEditText(emailCliente, getString(R.string.validacaoemail))){
             emailCliente.requestFocus();
             return false;
         }
 
         if (!Validacao.validarEditText(senhaCliente, getString(R.string.validacaosenha))){
+            senhaCliente.requestFocus();
+            return false;
+        }
+
+        if (senhaCliente.length() < 6){
+            confirmacaoSenhaCliente.setError("A senha deve conter mais que 6 caracteres!");
             senhaCliente.requestFocus();
             return false;
         }
@@ -192,64 +194,5 @@ public class ClienteActivity extends AppCompatActivity {
 
         sexoSpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         sexoCliente.setAdapter(sexoSpinnerArrayAdapter);
-
-        /*
-
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                this,R.layout.spinner_item,plantsList){
-            @Override
-            public boolean isEnabled(int position){
-                if(position == 0)
-                {
-                    // Disable the first item from Spinner
-                    // First item will be use for hint
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0){
-                    // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
-                }
-                else {
-                    tv.setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        };
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(spinnerArrayAdapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItemText = (String) parent.getItemAtPosition(position);
-                // If user change the default selection
-                // First item is disable and it is used for hint
-                if(position > 0){
-                    // Notify the selected item text
-                    Toast.makeText
-                            (getApplicationContext(), "Selected : " + selectedItemText, Toast.LENGTH_SHORT)
-                            .show();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-         */
-
     }
 }

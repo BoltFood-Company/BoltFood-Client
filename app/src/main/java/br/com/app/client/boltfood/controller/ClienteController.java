@@ -13,4 +13,9 @@ public class ClienteController {
         clienteDAO = new ClienteDAO();
         clienteDAO.inserirCliente(cliente);
     }
+
+    public int alterarCliente(String idDocument, Cliente cliente) {
+        clienteDAO = new ClienteDAO();
+         return clienteDAO.alterarCliente(idDocument, cliente);
+    }
 }

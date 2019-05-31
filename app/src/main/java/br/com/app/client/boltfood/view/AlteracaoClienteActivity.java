@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -28,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.com.app.client.boltfood.R;
+import br.com.app.client.boltfood.controller.ClienteController;
 import br.com.app.client.boltfood.model.entity.Cliente;
 
 public class AlteracaoClienteActivity extends AppCompatActivity {
@@ -42,8 +40,9 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
     private Spinner sexo;
 
     private String idDocumentCliente = "";
+    private Cliente cliente;
 
-    private final String[] sexos = new String[] { "Selecione", "Masculilno", "Feminino", "Outro" };
+    private final String[] sexos = new String[] { "Selecione", "Masculino", "Feminino", "Outro" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +59,6 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
         dataNascimento = findViewById(R.id.dataNascimentoAlteracaoEditText);
         sexo = findViewById(R.id.sexoAlteracaoClienteSpinner);
 
-        carregaCliente();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         carregaSexos();
         carregaCliente();
     }
@@ -103,12 +96,49 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
                                     dataNascimento.setText(cliente.getDataNascimento());
 
                                 if (cliente.getSexo() != null && !cliente.getSexo().equals("")){
+                                    switch (cliente.getSexo().toLowerCase()) {
+                                        case "masculino":
+                                            sexo.setSelection(1);
+                                            break;
 
+                                        case "feminino":
+                                            sexo.setSelection(2);
+                                            break;
+
+                                        case "outro":
+                                            sexo.setSelection(3);
+                                            break;
+
+                                        default:
+                                            sexo.setSelection(0);
+                                            break;
+                                    }
                                 }
                             }
                         }
                     }
                 });
+    }
+
+    public void alterarCadastro(View v) {
+        Cliente alterarCliente = new Cliente();
+        alterarCliente.setNome(nome.getText().toString());
+
+        alterarCliente.setCpf(documento.getText().toString());
+        alterarCliente.setTelefone(telefone.getText().toString());
+        alterarCliente.setDataNascimento(dataNascimento.getText().toString());
+
+        if (sexo.getSelectedItemPosition() > 0)
+            alterarCliente.setSexo(sexo.getSelectedItem().toString());
+        else
+            alterarCliente.setSexo("");
+
+        ClienteController clienteController = new ClienteController();
+        if (clienteController.alterarCliente(idDocumentCliente, alterarCliente) > 0) {
+            Toast.makeText(getApplicationContext(), "Cadastro atualizado!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Não foi possível atualizar. Tente mais tarde!", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void carregaSexos(){
