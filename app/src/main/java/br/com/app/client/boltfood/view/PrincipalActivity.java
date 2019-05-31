@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import android.support.v7.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,12 +35,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.PrincipalController;
 import br.com.app.client.boltfood.controller.RestauranteHolder;
 import br.com.app.client.boltfood.model.entity.Cliente;
 import br.com.app.client.boltfood.model.entity.Restaurante;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PrincipalActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
@@ -58,8 +63,11 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
     private FirestoreRecyclerAdapter<Restaurante, RestauranteHolder> adapter;
 
     private TextView nomeUsuario, emailUsuario;
+    private CircleImageView imagemUsuario;
 
     private FrameLayout frameLayout;
+
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,7 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
 
         nomeUsuario = nvDrawer.getHeaderView(0).findViewById(R.id.nomeUsuarioTextView);
         emailUsuario = nvDrawer.getHeaderView(0).findViewById(R.id.emailUsuarioTextView);
+        imagemUsuario = nvDrawer.getHeaderView(0).findViewById(R.id.imagemDrawerCircleImageView);
 
         carregaCliente();
 
@@ -94,6 +103,22 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         adapter = setAdapter(query);
         listaRecycler.setAdapter(adapter);
         adapter.startListening();
+
+        StorageReference pathRef = storageReference.child("imagens/perfil/" + auth.getUid() + ".png");
+        Log.d("LocalFoto", pathRef.getDownloadUrl().toString());
+        Log.d("LocalFoto", pathRef.getStorage().toString());
+
+
+
+        /*
+        //recuperar dados usuario
+        if (auth.getCurrentUser().getPhotoUrl() != null){
+            Glide.with(PrincipalActivity.this).load(auth.getCurrentUser().getPhotoUrl()).into(imagemUsuario);
+        } else {
+            imagemUsuario.setImageResource(R.drawable.padrao);
+        }
+        //auth.getCurrentUser().getpho
+        */
     }
 
     @Override
