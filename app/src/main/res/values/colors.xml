@@ -8,5 +8,6 @@
     <color name="colorAccent">#6A1B9A</color>
     <color name="headerColor">#e3e3e3</color>
     <color name="starColor">#FEC200</color>
+    <color name="black">#000000</color>
 
 </resources>

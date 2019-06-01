@@ -70,7 +70,6 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
     private TextView headerNome;
     private TextView headerEstrela;
     private ImageView headerImagem;
-    private ImageView headerBg;
     private LinearLayout header;
 
 

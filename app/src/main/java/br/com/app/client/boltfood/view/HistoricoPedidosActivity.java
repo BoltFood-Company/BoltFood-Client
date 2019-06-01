@@ -50,8 +50,7 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirestoreRecyclerAdapter<Pedido, HistoricoPedidoHolder> adapter;
-    private DocumentReference ref;
-    private HistoricoPedidoController controller;
+
     private String nomeRestaurante;
     private String imagemRestaurante;
 
@@ -71,7 +70,7 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
         adapter = setAdapter(query);
         historicoPedidoRecycler.setAdapter(adapter);
         adapter.startListening();
-        progressBar.setVisibility(View.INVISIBLE);
+
     }
 
     @Override
@@ -115,6 +114,7 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
 
                         holder.setDataDoPedido(DateFormat.getDateInstance().format(model.getData()));
                         holder.setIdRestaurante(model.getIdRestaurante().getId());
+                        progressBar.setVisibility(View.INVISIBLE);
 
                     }
                 });
@@ -126,7 +126,6 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
             public HistoricoPedidoHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.historico_pedido_card_layout, viewGroup, false);
                 final HistoricoPedidoHolder viewHolder = new HistoricoPedidoHolder(view);
-                progressBar.setVisibility(View.INVISIBLE);
 
                 viewHolder.setOnClickListener(new HistoricoPedidoHolder.ClickListener(){
 

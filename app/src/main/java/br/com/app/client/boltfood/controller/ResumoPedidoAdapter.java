@@ -35,8 +35,10 @@ public class ResumoPedidoAdapter extends RecyclerView.Adapter<ResumoPedidoAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ResumoPedidoAdapter.ViewHolder viewHolder, int i) {
+
         viewHolder.nome.setText(listaProdutos.get(i).getNome());
         viewHolder.preco.setText(listaProdutos.get(i).getPreco());
+        viewHolder.qtde.setText(listaProdutos.get(i).getQtde()+ " X ");
         Glide.with(mContext).load(listaProdutos.get(i).getUrl()).into(viewHolder.imagem);
 
     }
@@ -50,6 +52,7 @@ public class ResumoPedidoAdapter extends RecyclerView.Adapter<ResumoPedidoAdapte
 
         private final TextView nome;
         private final TextView preco;
+        private final TextView qtde;
         private final ImageView imagem;
 
         public ViewHolder(@NonNull View itemView) {
@@ -58,6 +61,7 @@ public class ResumoPedidoAdapter extends RecyclerView.Adapter<ResumoPedidoAdapte
             nome = itemView.findViewById(R.id.nomeProduto);
             imagem = itemView.findViewById(R.id.produtoImagem);
             preco = itemView.findViewById(R.id.precoProduto);
+            qtde = itemView.findViewById(R.id.qtdeProduto);
 
         }
     }

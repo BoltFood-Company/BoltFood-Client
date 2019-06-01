@@ -17,6 +17,7 @@ public class Produto implements Serializable {
     private String url;
     private long preco;
     private long qtdeEstoque;
+    private long qtde;
 
     private String restauranteId;
 
@@ -26,7 +27,7 @@ public class Produto implements Serializable {
 
     }
 
-    public Produto(String id, String nome, String descricao, long preco, long qtdeEstoque, String restauranteId, String url) {
+    public Produto(long qtde, String id, String nome, String descricao, long preco, long qtdeEstoque, String restauranteId, String url) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
@@ -34,6 +35,15 @@ public class Produto implements Serializable {
         this.qtdeEstoque = qtdeEstoque;
         this.restauranteId = restauranteId;
         this.url = url;
+        this.qtde = qtde;
+    }
+
+    public long getQtde() {
+        return qtde;
+    }
+
+    public void setQtde(int qtde) {
+        this.qtde = qtde;
     }
 
     public List<Pedido> getPedidos() {

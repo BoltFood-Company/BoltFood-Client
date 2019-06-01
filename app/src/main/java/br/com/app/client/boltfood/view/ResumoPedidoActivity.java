@@ -44,6 +44,7 @@ public class ResumoPedidoActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private ResumoPedidoAdapter listaAdapater;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class ResumoPedidoActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Pedido");
 
-        progressBar = findViewById(R.id.progressCircleProdutos);
+        progressBar = findViewById(R.id.progressCircleResumoPedido);
 
         Bundle extras = getIntent().getExtras();
 
@@ -93,7 +94,7 @@ public class ResumoPedidoActivity extends AppCompatActivity {
                             recyclerView.setHasFixedSize(true);
                             recyclerView.setLayoutManager(layoutManager);
                             recyclerView.setAdapter(listaAdapater);
-
+                            progressBar.setVisibility(View.INVISIBLE);
                         } else {
                             Log.d("doc", "No such document");
                         }
