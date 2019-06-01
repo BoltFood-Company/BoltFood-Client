@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.ProdutosHolder;
+import br.com.app.client.boltfood.controller.ResumoPedidoAdapter;
 import br.com.app.client.boltfood.model.entity.Pedido;
 import br.com.app.client.boltfood.model.entity.Produto;
 
@@ -37,11 +39,10 @@ public class ResumoPedidoActivity extends AppCompatActivity {
     private TextView total;
     private TextView numeroPedidoResumo;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirestoreRecyclerAdapter<Produto, ProdutosHolder> adapter;
-    private DocumentReference ref;
-    private Query query;
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private ResumoPedidoAdapter listaAdapater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class ResumoPedidoActivity extends AppCompatActivity {
         nome = findViewById(R.id.nomeResumoPedido);
         total = findViewById(R.id.precoResumoPedido);
         numeroPedidoResumo = findViewById(R.id.numeroPedidoResumo);
+
 
         if(extras != null) {
             String idPedido = (String) extras.get("idPedido");
@@ -83,13 +85,14 @@ public class ResumoPedidoActivity extends AppCompatActivity {
                             Pedido pedido = document.toObject(Pedido.class);
                             List<Produto> listaProdutos = pedido.getPedidoItem();
 
-                                //montar os cards apartirar da listagem
-                            for(Produto produto : listaProdutos) {
-                                Log.d("xpto",produto.getNome());
-                                Log.d("xpto", produto.getPreco());
+                            recyclerView = findViewById(R.id.recyclerResumoPedido);
 
-                            }
+                            layoutManager = new LinearLayoutManager(getApplicationContext());
+                            listaAdapater = new ResumoPedidoAdapter(listaProdutos, getApplicationContext());
 
+                            recyclerView.setHasFixedSize(true);
+                            recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.setAdapter(listaAdapater);
 
                         } else {
                             Log.d("doc", "No such document");
@@ -108,6 +111,8 @@ public class ResumoPedidoActivity extends AppCompatActivity {
 
 
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
