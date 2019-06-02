@@ -142,7 +142,6 @@ public class CartaoActivity extends AppCompatActivity {
 
 
         if(idDocumentoCartao == null) {
-            cartaoController.inserirCartao(cartao);
 
             db.collection("Cartao").whereEqualTo("idUser", auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
@@ -151,13 +150,15 @@ public class CartaoActivity extends AppCompatActivity {
                         idDocumentoCartao = queryDocumentSnapshots.getDocuments().get(0).getId();
 
                         intent.putExtra("idDocumentoCartao", idDocumentoCartao);
+                        cartaoController.atualizarCartao(cartao, idDocumentoCartao);
+                        Toast.makeText(getApplicationContext(), "Cartão Atualizado Com Sucesso", Toast.LENGTH_SHORT).show();
+                    }else {
+                        cartaoController.inserirCartao(cartao);
                         Toast.makeText(getApplicationContext(), "Cartão Cadastrado Com Sucesso", Toast.LENGTH_SHORT).show();
-
-
                     }
-
                 }
             });
+
             startActivity(intent);
             this.finish();
         } else {
