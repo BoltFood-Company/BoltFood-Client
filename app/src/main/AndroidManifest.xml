@@ -29,7 +29,6 @@
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.ClienteActivity" />
         <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.CartaoConfirmActivity" />
         <activity android:name=".view.ProdutoActivity" />
         <activity android:name=".view.ProdutosActivity" />
         <activity android:name=".view.ResetSenhaActivity" />
