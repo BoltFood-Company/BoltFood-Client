@@ -31,9 +31,6 @@
         <activity android:name=".view.ProdutoActivity" />
         <activity android:name=".view.ProdutosActivity" />
         <activity android:name=".view.ResetSenhaActivity" />
-        <activity
-            android:name="com.cooltechworks.creditcarddesign.CardEditActivity"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
