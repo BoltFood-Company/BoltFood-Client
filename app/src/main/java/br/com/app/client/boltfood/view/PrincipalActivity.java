@@ -104,21 +104,19 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         listaRecycler.setAdapter(adapter);
         adapter.startListening();
 
+        /*
         StorageReference pathRef = storageReference.child("imagens/perfil/" + auth.getUid() + ".png");
         Log.d("LocalFoto", pathRef.getDownloadUrl().toString());
         Log.d("LocalFoto", pathRef.getStorage().toString());
-
-
-
-        /*
-        //recuperar dados usuario
-        if (auth.getCurrentUser().getPhotoUrl() != null){
-            Glide.with(PrincipalActivity.this).load(auth.getCurrentUser().getPhotoUrl()).into(imagemUsuario);
-        } else {
-            imagemUsuario.setImageResource(R.drawable.padrao);
-        }
-        //auth.getCurrentUser().getpho
         */
+
+
+
+        //recuperar dados usuario
+
+        //auth.getCurrentUser().getpho
+
+        carregaImagem();
     }
 
     @Override
@@ -126,6 +124,15 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         super.onResume();
 
         carregaCliente();
+        carregaImagem();
+    }
+
+    private void carregaImagem(){
+        if (auth.getCurrentUser().getPhotoUrl() != null){
+            Glide.with(PrincipalActivity.this).load(auth.getCurrentUser().getPhotoUrl()).into(imagemUsuario);
+        } else {
+            imagemUsuario.setImageResource(R.drawable.padrao);
+        }
     }
 
     public void selectItemDrawer(MenuItem menuItem) {
