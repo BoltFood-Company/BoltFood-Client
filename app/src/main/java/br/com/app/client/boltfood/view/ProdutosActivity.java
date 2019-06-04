@@ -70,7 +70,6 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
     private TextView headerNome;
     private TextView headerEstrela;
     private ImageView headerImagem;
-    private ImageView headerBg;
     private LinearLayout header;
 
 
@@ -111,7 +110,7 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
             headerNome.setText(nomeRestaurante);
             headerEstrela.setText(notaRestaurante);
             Glide.with(getApplicationContext()).load(imagemRestaurante).into(headerImagem);
-            Glide.with(this).load(bgRestaurante).into(new SimpleTarget<Drawable>() {
+            Glide.with(this).load(bgRestaurante).centerCrop().into(new SimpleTarget<Drawable>() {
                 @Override
                 public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

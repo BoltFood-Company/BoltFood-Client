@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -67,7 +68,7 @@ public class RestauranteHolder extends RecyclerView.ViewHolder {
     public void setId (String id) {idRestaurante.setText(id);}
 
     public void setImagem(String i, Context context) {
-        Glide.with(context).load(i).into(imagem);
+        Glide.with(context).load(i).apply(RequestOptions.circleCropTransform()).into(imagem);
     }
 
 

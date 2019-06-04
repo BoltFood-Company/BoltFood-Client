@@ -7,9 +7,15 @@ public class CartaoController {
 
     private CartaoDAO cartaoDAO;
 
-    public void inserirCliente(Cartao cartao) {
+    public String inserirCartao(Cartao cartao) {
         cartaoDAO = new CartaoDAO();
-
-        cartaoDAO.inserirCartao(cartao);
+        return cartaoDAO.inserirCartao(cartao);
     }
+
+    public void atualizarCartao(Cartao cartao, String idDocumento) {
+        cartaoDAO = new CartaoDAO();
+        cartaoDAO.atualizaCartao(cartao, idDocumento);
+    }
+
+
 }

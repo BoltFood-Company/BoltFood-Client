@@ -138,7 +138,7 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
     public void selectItemDrawer(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.pagamento:
-                Intent intentFormasPagamento = new Intent(getApplicationContext(), CartaoActivity.class);
+                Intent intentFormasPagamento = new Intent(getApplicationContext(), SelecaoCartaoActivity.class);
                 startActivity(intentFormasPagamento);
                 break;
 

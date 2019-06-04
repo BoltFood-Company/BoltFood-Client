@@ -8,9 +8,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.CartaoController;
@@ -33,8 +37,16 @@ public class CartaoActivity extends AppCompatActivity {
     private Cartao cartao;
     private CartaoController cartaoController;
 
+    private String numCartao;
+    private String anoCartao;
+    private String mesCartao;
+    private String cpfCartao;
+    private String cvvCartao;
+    private String nomeCartao;
+    private String idDocumentoCartao;
+    private Bundle extras;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +66,34 @@ public class CartaoActivity extends AppCompatActivity {
         cvv = findViewById(R.id.cvvEditText);
         salvar = findViewById(R.id.salvarBtn);
 
+        extras = getIntent().getExtras();
+
+        if(extras != null) {
+            getSupportActionBar().setTitle("Edição de Cartão");
+            numCartao = (String) extras.get("numCartao");
+            anoCartao = (String) extras.get("anoCartao");
+            mesCartao = (String) extras.get("mesCartao");
+            cpfCartao = (String) extras.get("cpfCartao");
+            cvvCartao = (String) extras.get("cvvCartao");
+            nomeCartao = (String) extras.get("nomeCartao");
+            idDocumentoCartao = (String) extras.get("idDocumentoCartao");
+
+            numeroCartao.setText(numCartao);
+            validadeMes.setText(mesCartao);
+            validadeAno.setText(anoCartao);
+            nomeTitular.setText(nomeCartao);
+            cpfTitular.setText(cpfCartao);
+            cvv.setText(cvvCartao);
+        }
+
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Cadastrar(v);
             }
         });
+
+
 
     }
 
@@ -79,20 +113,61 @@ public class CartaoActivity extends AppCompatActivity {
 
         cartao = new Cartao();
 
+        String numCartao = numeroCartao.getText().toString();
+        String anoCartao = validadeAno.getText().toString();
+        String mesCartao = validadeMes.getText().toString();
+        String cpfCartao = cpfTitular.getText().toString();
+        String cvvCartao = cvv.getText().toString();
+        String nomeCartao = nomeTitular.getText().toString();
+        String userId = currentUser.getUid();
 
-        cartao.setNumeroCartao(numeroCartao.getText().toString());
-        cartao.setAno(validadeAno.getText().toString());
-        cartao.setMes(validadeMes.getText().toString());
-        cartao.setCpf(cpfTitular.getText().toString());
-        cartao.setCvv(cvv.getText().toString());
-        cartao.setNome(nomeTitular.getText().toString());
-        cartao.setIdUser(currentUser.getUid());
+        cartao.setNumeroCartao(numCartao);
+        cartao.setAno(anoCartao);
+        cartao.setMes(mesCartao);
+        cartao.setCpf(cpfCartao);
+        cartao.setCvv(cvvCartao);
+        cartao.setNome(nomeCartao);
+        cartao.setIdUser(userId);
 
         cartaoController = new CartaoController();
-        cartaoController.inserirCliente(cartao);
+        final Intent intent = new Intent(getApplicationContext(), SelecaoCartaoActivity.class);
 
-        Intent intent = new Intent(getApplicationContext(), CartaoConfirmActivity.class);
-        startActivity(intent);
+
+        intent.putExtra("numCartao",numCartao);
+        intent.putExtra("anoCartao",anoCartao);
+        intent.putExtra("mesCartao",mesCartao);
+        intent.putExtra("cpfCartao",cpfCartao);
+        intent.putExtra("cvvCartao", cvvCartao);
+        intent.putExtra("nomeCartao", nomeCartao);
+
+
+        if(idDocumentoCartao == null) {
+
+            db.collection("Cartao").whereEqualTo("idUser", auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    if(!queryDocumentSnapshots.isEmpty()){
+                        idDocumentoCartao = queryDocumentSnapshots.getDocuments().get(0).getId();
+
+                        intent.putExtra("idDocumentoCartao", idDocumentoCartao);
+                        cartaoController.atualizarCartao(cartao, idDocumentoCartao);
+                        Toast.makeText(getApplicationContext(), "Cartão Atualizado Com Sucesso", Toast.LENGTH_SHORT).show();
+                    }else {
+                        cartaoController.inserirCartao(cartao);
+                        Toast.makeText(getApplicationContext(), "Cartão Cadastrado Com Sucesso", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            startActivity(intent);
+            this.finish();
+        } else {
+            cartaoController.atualizarCartao(cartao, idDocumentoCartao);
+            Toast.makeText(getApplicationContext(), "Cartão Atualizado Com Sucesso", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
+            this.finish();
+        }
+
     }
 
     private boolean validaCampos(){
@@ -126,11 +201,6 @@ public class CartaoActivity extends AppCompatActivity {
             cpfTitular.requestFocus();
             return false;
         }
-
-//        if (!Documento.isValidCPF(cpfTitular.getText().toString())){
-//            cpfTitular.setError(getString(R.string.cpfinvalido));
-//            return false;
-//        }
 
         return true;
 

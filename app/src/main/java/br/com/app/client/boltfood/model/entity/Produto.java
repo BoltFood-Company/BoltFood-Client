@@ -17,8 +17,9 @@ public class Produto implements Serializable {
     private String url;
     private long preco;
     private long qtdeEstoque;
+    private long qtde;
 
-    private Restaurante restaurante;
+    private String restauranteId;
 
     private Set<ItemPedido> itens = new HashSet<>();
 
@@ -26,14 +27,23 @@ public class Produto implements Serializable {
 
     }
 
-    public Produto(String id, String nome, String descricao, long preco, Integer quantidade, Restaurante restaurante, String url) {
+    public Produto(long qtde, String id, String nome, String descricao, long preco, long qtdeEstoque, String restauranteId, String url) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.qtdeEstoque = qtdeEstoque;
-        this.restaurante = restaurante;
+        this.restauranteId = restauranteId;
         this.url = url;
+        this.qtde = qtde;
+    }
+
+    public long getQtde() {
+        return qtde;
+    }
+
+    public void setQtde(int qtde) {
+        this.qtde = qtde;
     }
 
     public List<Pedido> getPedidos() {
@@ -81,6 +91,10 @@ public class Produto implements Serializable {
         return nf.format(preco);
     }
 
+    public long getPrecoNumerico() {
+        return preco;
+    }
+
     public void setPreco(long preco) {
         this.preco = preco;
     }
@@ -93,12 +107,12 @@ public class Produto implements Serializable {
         this.qtdeEstoque = qtdeEstoque;
     }
 
-    public Restaurante getRestaurante() {
-        return restaurante;
+    public String getRestauranteId() {
+        return restauranteId;
     }
 
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
+    public void setRestauranteId(String restauranteId) {
+        this.restauranteId = restauranteId;
     }
 
     public Set<ItemPedido> getItens() {
@@ -109,17 +123,6 @@ public class Produto implements Serializable {
         this.itens = itens;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Produto produto = (Produto) o;
-        return Objects.equals(id, produto.id);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 
 }

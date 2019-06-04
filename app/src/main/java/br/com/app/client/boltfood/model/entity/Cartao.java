@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 public class Cartao implements Serializable {
 
 
-    private String cpf, mes, ano, cvv, numeroCartao, nome, idUser;;
+    private String cpf, mes, ano, cvv, numeroCartao, nome, idUser;
 
 
 
@@ -23,6 +23,7 @@ public class Cartao implements Serializable {
         this.nome = nome;
         this.idUser = idUser;
     }
+
 
     public String getCpf() {
         return cpf;
