@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +24,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -43,7 +40,6 @@ import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.ClienteController;
 import br.com.app.client.boltfood.model.entity.Cliente;
 import br.com.app.client.boltfood.view.util.Constantes;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AlteracaoClienteActivity extends AppCompatActivity {
 
@@ -57,12 +53,9 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
     private EditText documento;
     private EditText dataNascimento;
     private Spinner sexo;
-    private CircleImageView imagemUsuario;
+    private ImageView imagemUsuario;
 
     private String idDocumentCliente = "";
-    private Cliente cliente;
-    private String urlImagemUsuario;
-
     private Bitmap imgPerfil;
 
     private final String[] sexos = new String[] { "Selecione", "Masculino", "Feminino", "Outro" };
@@ -83,17 +76,35 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
         sexo = findViewById(R.id.sexoAlteracaoClienteSpinner);
         imagemUsuario = findViewById(R.id.imagemPerfilAlteracao);
 
+        carregaImagem();
         carregaSexos();
         carregaCliente();
     }
 
     private void carregaImagem(){
-        if (auth.getCurrentUser().getPhotoUrl() != null){
-            Glide.with(getApplicationContext()).load(auth.getCurrentUser().getPhotoUrl()).into(imagemUsuario);
-            Log.d("IMAGEM",auth.getCurrentUser().getPhotoUrl().toString());
-        } else {
-            imagemUsuario.setImageResource(R.drawable.padrao);
-        }
+
+        storageReference.child(Constantes.CAMINHO_IMAGEM_PERFIL + auth.getUid() + ".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getApplicationContext()).load(uri.toString()).into(imagemUsuario);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                imagemUsuario.setImageResource(R.drawable.padrao);
+            }
+        });
+
+/*
+        storageReference.child(Constantes.CAMINHO_IMAGEM_PERFIL + auth.getUid() + ".png").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (!task.getResult().toString().equals(""))
+                    Glide.with(getApplicationContext()).load(task.getResult().toString()).into(imagemUsuario);
+                else
+                    imagemUsuario.setImageResource(R.drawable.padrao);
+            }
+        });*/
     }
 
     @Override
@@ -128,13 +139,6 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
                                 if (cliente.getDataNascimento() != null && !cliente.getDataNascimento().equals(""))
                                     dataNascimento.setText(cliente.getDataNascimento());
 
-                                if (!cliente.getUrlImagem().equals("")) {
-                                    Toast.makeText(getApplicationContext(), cliente.getUrlImagem(), Toast.LENGTH_LONG).show();
-                                    Glide.with(getApplicationContext()).load(cliente.getUrlImagem()).into(imagemUsuario);
-                                }
-                                else
-                                    imagemUsuario.setImageResource(R.drawable.padrao);
-
                                 if (cliente.getSexo() != null && !cliente.getSexo().equals("")){
                                     switch (cliente.getSexo().toLowerCase()) {
                                         case "masculino":
@@ -167,9 +171,6 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
         alterarCliente.setCpf(documento.getText().toString());
         alterarCliente.setTelefone(telefone.getText().toString());
         alterarCliente.setDataNascimento(dataNascimento.getText().toString());
-
-        if (!urlImagemUsuario.equals(""))
-            alterarCliente.setUrlImagem(urlImagemUsuario);
 
         if (sexo.getSelectedItemPosition() > 0)
             alterarCliente.setSexo(sexo.getSelectedItem().toString());
@@ -250,38 +251,28 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
     }
 
     private void salvarImagemStorage() {
-        //recuperar imagem
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imgPerfil.compress(Bitmap.CompressFormat.PNG, 80, baos);
-        byte[] dadosImagem = baos.toByteArray();
 
-        //salvar no firebase
-        StorageReference imagemRef = storageReference
-                .child("imagens")
-                .child("perfil")
-                .child(auth.getUid() + ".png");
+        try{
+            //recuperar imagem
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imgPerfil.compress(Bitmap.CompressFormat.PNG, 90, baos);
+            byte[] dadosImagem = baos.toByteArray();
+            baos.close();
 
-        UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Falha ao fazer upload da imagem", Toast.LENGTH_LONG).show();
-                urlImagemUsuario = "";
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            //salvar no firebase
+            StorageReference imagemRef = storageReference
+                    .child("imagens").child("perfil")
+                    .child(auth.getUid() + ".png");
 
-                Toast.makeText(getApplicationContext(), "urlString", Toast.LENGTH_LONG).show();
+            UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Falha ao fazer upload da imagem", Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (Exception ex) {
 
-                storageReference.child(Constantes.CAMINHO_IMAGEM_PERFIL + auth.getUid() + ".png").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        Toast.makeText(getApplicationContext(), task.getResult().toString(), Toast.LENGTH_LONG).show();
-                        urlImagemUsuario = task.getResult().toString();
-                    }
-                });
-            }
-        });
+        }
     }
 }

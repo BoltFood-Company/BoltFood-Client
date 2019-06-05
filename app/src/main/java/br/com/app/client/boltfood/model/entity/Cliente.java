@@ -20,16 +20,6 @@ public class Cliente implements Serializable {
     private String email;
     private String senha;
 
-    public String getUrlImagem() {
-        return urlImagem;
-    }
-
-    public void setUrlImagem(String urlImagem) {
-        this.urlImagem = urlImagem;
-    }
-
-    private String urlImagem;
-
     private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente() {

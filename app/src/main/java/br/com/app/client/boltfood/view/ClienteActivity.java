@@ -136,9 +136,6 @@ public class ClienteActivity extends AppCompatActivity {
                             salvarImagemStorage();
 
                             Toast.makeText(getApplicationContext(), getString(R.string.cadastroefetuadocomsucesso), Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            startActivity(intent);
-                            finish();
                         } else {
                             Toast.makeText(getApplicationContext(), getString(R.string.usuarionaocadastrado), Toast.LENGTH_LONG).show();
                         }
@@ -238,33 +235,42 @@ public class ClienteActivity extends AppCompatActivity {
     }
 
     private void salvarImagemStorage() {
-        //recuperar imagem
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imgPerfil.compress(Bitmap.CompressFormat.PNG, 80, baos);
-        byte[] dadosImagem = baos.toByteArray();
+        try{
+            //recuperar imagem
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imgPerfil.compress(Bitmap.CompressFormat.PNG, 90, baos);
+            byte[] dadosImagem = baos.toByteArray();
+            baos.close();
 
-        //salvar no firebase
-        StorageReference imagemRef = storageReference
-                .child("imagens")
-                .child("perfil")
-                .child(idUsuario + ".png");
+            //salvar no firebase
+            StorageReference imagemRef = storageReference
+                    .child("imagens")
+                    .child("perfil")
+                    .child(idUsuario + ".png");
 
-        UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Falha ao fazer upload da imagem", Toast.LENGTH_LONG).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getApplicationContext(), "Sucesso ao fazer upload da imagem", Toast.LENGTH_LONG).show();
+            UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    carregaLogin();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    carregaLogin();
+                }
+            });
+        } catch (Exception e) {
 
-                Uri url = taskSnapshot.getUploadSessionUri();
-                //atualizarFoto(url);
-            }
-        });
+        }
     }
+
+    private void carregaLogin(){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     private void atualizarFoto(Uri url){
 
