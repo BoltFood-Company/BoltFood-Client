@@ -27,7 +27,7 @@ public class ClienteDAO {
 
         try {
             db.collection("Cliente").document(idDocument).update("cpf", cliente.getCpf(), "dataNascimento", cliente.getDataNascimento(),
-                    "nome", cliente.getNome(), "sexo", cliente.getSexo(), "telefone", cliente.getTelefone(), "urlImagem", cliente.getUrlImagem());
+                    "nome", cliente.getNome(), "sexo", cliente.getSexo(), "telefone", cliente.getTelefone());
 
             return 1;
 
