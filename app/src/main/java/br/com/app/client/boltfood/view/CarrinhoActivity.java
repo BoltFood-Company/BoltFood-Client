@@ -1,6 +1,7 @@
 package br.com.app.client.boltfood.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,18 +14,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.CarrinhoAdapter;
 import br.com.app.client.boltfood.controller.PedidoController;
-import br.com.app.client.boltfood.controller.ResumoPedidoAdapter;
 import br.com.app.client.boltfood.model.entity.Pedido;
 import br.com.app.client.boltfood.model.entity.Produto;
 
@@ -39,6 +43,10 @@ public class CarrinhoActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private CarrinhoAdapter listaAdapater;
+
+    private DocumentReference idRestaurante;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private long totalPedido = 0;
 
@@ -78,20 +86,24 @@ public class CarrinhoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                FirebaseAuth auth = FirebaseAuth.getInstance();
+
 
                 Pedido pedido = new Pedido();
-
                 pedido.setIdcliente(auth.getUid());
                 pedido.setData(new Date());
                 pedido.setPedidoItem(produtos);
                 pedido.setNumeroPedido(new Random().nextInt(1000) + 1);
                 pedido.setTotalPedido(totalPedido);
+                idRestaurante = db.document("Restaurante/" + produtos.get(0).getIdRestaurante().getId());
+                pedido.setIdRestaurante(idRestaurante);
 
                 new PedidoController().inserir(pedido);
+
+                produtos.clear();
+
+                finish();
             }
         });
-
 
     }
 
@@ -114,12 +126,11 @@ public class CarrinhoActivity extends AppCompatActivity {
         try {
             boolean existeLista = false;
             for (Produto p : produtos) {
-                if (p.equals(produto)) {
+                if (!p.equals(produto)) {
                     existeLista = true;
                     if (p.getQtde() + produto.getQtde() <= p.getQtdeEstoque()) {
                         p.setQtde(p.getQtde() + produto.getQtde());
-                    }
-                    else {
+                    } else {
                         throw new RuntimeException();
                     }
                 }
@@ -133,12 +144,5 @@ public class CarrinhoActivity extends AppCompatActivity {
             Toast.makeText(context.getApplicationContext(), "Quantidade acima do valor disponível!", Toast.LENGTH_SHORT).show();
         }
 
-
-
-
-        /*
-        else {
-            Toast.makeText(context.getApplicationContext(), "Só é possível adicionar produtos ao Carrinho do mesmo Restaurante!", Toast.LENGTH_SHORT).show();
-        }*/
     }
 }

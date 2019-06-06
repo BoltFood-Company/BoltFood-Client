@@ -288,7 +288,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                         Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
 
                         intent.putExtra("idRestaurante",id);
-                        intent.putExtra("idRestaurante",id);
                         intent.putExtra("nomeRestaurante", nomeRestaurante);
                         intent.putExtra("notaRestaurante", notaRestaurante);
                         intent.putExtra("imagemRestaurante", imagemRestaurante);

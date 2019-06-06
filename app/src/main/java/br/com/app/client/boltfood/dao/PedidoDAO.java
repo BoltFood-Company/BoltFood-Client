@@ -11,12 +11,15 @@ public class PedidoDAO {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private String doc;
-    public void inserir(Pedido pedido) {
+    public void inserir(final Pedido pedido) {
         db.collection("Pedido").add(pedido).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
-                doc = documentReference.getId();
+                pedido.setId(documentReference.getId());
+                db.collection("Pedido").document(pedido.getId()).update("id", pedido.getId());
             }
         });
+
+
     }
 }
