@@ -125,7 +125,8 @@ public class ProdutoActivity extends AppCompatActivity {
         buttonAdicionarProduto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                produto.setQtde(quantidade);
+                CarrinhoActivity.adicionarProduto(produto, getApplicationContext());
             }
         });
 

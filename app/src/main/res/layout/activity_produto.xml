@@ -23,7 +23,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287" />
+        app:layout_constraintVertical_bias="0.252" />
 
     <TextView
         android:id="@+id/textViewDescricaoProduto"
@@ -37,10 +37,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.509" />
+        app:layout_constraintVertical_bias="0.406" />
 
     <ProgressBar
         android:id="@+id/progressBarLoadProduto"
@@ -82,7 +82,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <Button
-            android:id="@+id/buttonQtdeMais"
+            android:id="@+id/buttonQtdeMenos"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="15dp"
@@ -92,7 +92,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="+"
+            android:text="-"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -106,7 +106,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/buttonQtdeMenos"
+            android:id="@+id/buttonQtdeMais"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
@@ -117,7 +117,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:backgroundTint="@color/colorPrimaryDark"
-            android:text="-"
+            android:text="+"
             android:textColor="@color/white"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="107dp"

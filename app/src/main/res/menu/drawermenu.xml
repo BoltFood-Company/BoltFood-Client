@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/carrinhoDrawerItem"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="@string/carrinho" />
+
+    <item
         android:id="@+id/pedidos"
         android:icon="@drawable/pedido"
         android:title="@string/pedidos" />
+
     <item
         android:id="@+id/pagamento"
         android:icon="@drawable/pagamento"
