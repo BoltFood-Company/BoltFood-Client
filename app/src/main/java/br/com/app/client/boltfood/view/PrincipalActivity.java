@@ -167,6 +167,11 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                 startActivity(intentCadastro);
                 break;
 
+            case R.id.ajudaDrawerItem:
+                Intent intentAjuda = new Intent(getApplicationContext(), AjudaActivity.class);
+                startActivity(intentAjuda);
+                break;
+
                 default:
                     break;
         }

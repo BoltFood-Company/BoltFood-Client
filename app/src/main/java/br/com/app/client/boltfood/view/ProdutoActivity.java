@@ -1,6 +1,10 @@
 package br.com.app.client.boltfood.view;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,11 +21,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.nio.file.Files;
 import java.text.NumberFormat;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.model.entity.Produto;
+import br.com.app.client.boltfood.view.util.Constantes;
 
 public class ProdutoActivity extends AppCompatActivity {
 
@@ -48,7 +52,7 @@ public class ProdutoActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Produto");
+        getSupportActionBar().setTitle(getString(R.string.produto));
 
         progressBarLoadProduto = findViewById(R.id.progressBarLoadProduto);
         imageViewProduto = findViewById(R.id.imageViewProduto);
@@ -84,12 +88,8 @@ public class ProdutoActivity extends AppCompatActivity {
                             textViewValorTotal.setText(NumberFormat.getCurrencyInstance().format(precoTotal));
                         }
                     }
-
-
                 }
             });
-
-
         }
 
         buttonQtdeMenos.setOnClickListener(new View.OnClickListener() {
@@ -100,9 +100,7 @@ public class ProdutoActivity extends AppCompatActivity {
                     precoTotal -= produto.getPrecoNumerico();
                     textViewQuantidade.setText(String.valueOf(quantidade));
                     textViewValorTotal.setText(NumberFormat.getCurrencyInstance().format(precoTotal));
-
                 }
-
             }
         });
 
@@ -117,7 +115,7 @@ public class ProdutoActivity extends AppCompatActivity {
                     textViewValorTotal.setText(NumberFormat.getCurrencyInstance().format(precoTotal));
                 }
                 else
-                    Toast.makeText(getApplicationContext(), "Quantidade máxima disponível", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.quantidademaximadisponivel), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -126,10 +124,31 @@ public class ProdutoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 produto.setQtde(quantidade);
-                CarrinhoActivity.adicionarProduto(produto, getApplicationContext());
+                int retorno = CarrinhoActivity.adicionarProduto(produto, getApplicationContext());
+
+                if (retorno == Constantes.PRODUTO_ADICIONADO){
+                    Snackbar snackbar = Snackbar.make(v, "", Snackbar.LENGTH_LONG);
+                    View view = snackbar.getView();
+                    view.setMinimumHeight(50);
+
+                    view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorPrimaryDark));
+                    snackbar.setActionTextColor(Color.WHITE);
+
+                    TextView tv = view.findViewById(android.support.design.R.id.snackbar_text);
+                    tv.setTextColor(Color.WHITE);
+
+                    snackbar.setText(getString(R.string.itemadicionadoaocarrinho));
+                    snackbar.setAction(getString(R.string.irparaocarrinho), new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent carrinhoIntent = new Intent(getApplicationContext(), CarrinhoActivity.class);
+                            startActivity(carrinhoIntent);
+                        }
+                    });
+                    snackbar.show();
+                }
             }
         });
-
     }
 
     @Override

@@ -16,12 +16,12 @@
         android:title="@string/formasdepagamento" />
     <item
         android:id="@+id/cadastroDrawerItem"
-        android:icon="@drawable/configuracoes"
+        android:icon="@drawable/ic_cadastro_preto_24dp"
         android:title="@string/cadastro" />
     <item
-        android:id="@+id/configuracoesDrawerItem"
-        android:icon="@drawable/configuracoes"
-        android:title="@string/configuraçoes" />
+        android:id="@+id/ajudaDrawerItem"
+        android:icon="@drawable/ic_ajuda_preto_24dp"
+        android:title="@string/ajuda"/>
     <item
         android:id="@+id/sair"
         android:icon="@drawable/sair"

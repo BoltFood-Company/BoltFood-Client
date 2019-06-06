@@ -50,6 +50,13 @@
 
     <string name="salvar">Salvar</string>
     <string name="carregando">Carregando...</string>
+    <string name="ajuda">Ajuda</string>
+    <string name="versao">Versão</string>
+
+    <string name="produto">Produto</string>
+    <string name="quantidademaximadisponivel">Quantidade máxima disponível</string>
+    <string name="irparaocarrinho">Ir para o Carrinho</string>
+    <string name="itemadicionadoaocarrinho">Item adicionado ao Carrinho!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="action_settings">Settings</string>

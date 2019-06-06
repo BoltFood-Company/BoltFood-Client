@@ -1,10 +1,15 @@
 package br.com.app.client.boltfood.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +32,7 @@ import br.com.app.client.boltfood.controller.PedidoController;
 import br.com.app.client.boltfood.controller.ResumoPedidoAdapter;
 import br.com.app.client.boltfood.model.entity.Pedido;
 import br.com.app.client.boltfood.model.entity.Produto;
+import br.com.app.client.boltfood.view.util.Constantes;
 
 public class CarrinhoActivity extends AppCompatActivity {
 
@@ -103,12 +109,11 @@ public class CarrinhoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    public static void adicionarProduto(Produto produto, Context context) {
+    public static int adicionarProduto(Produto produto, Context context) {
         if (produtos.isEmpty()) {
             produtos.add(produto);
-            Toast.makeText(context.getApplicationContext(), "Produto adicionado ao Carrinho!", Toast.LENGTH_SHORT).show();
-            return;
+            //Toast.makeText(context.getApplicationContext(), "Produto adicionado ao Carrinho!", Toast.LENGTH_SHORT).show();
+            return Constantes.PRODUTO_ADICIONADO;
         }
 
         try {
@@ -126,19 +131,12 @@ public class CarrinhoActivity extends AppCompatActivity {
             }
             if (!existeLista) {
                 produtos.add(produto);
-
             }
-            Toast.makeText(context.getApplicationContext(), "Produto adicionado ao Carrinho!", Toast.LENGTH_SHORT).show();
+            return Constantes.PRODUTO_ADICIONADO;
+
         } catch (RuntimeException e) {
             Toast.makeText(context.getApplicationContext(), "Quantidade acima do valor disponível!", Toast.LENGTH_SHORT).show();
+            return Constantes.PRODUTO_SEM_ESTOQUE;
         }
-
-
-
-
-        /*
-        else {
-            Toast.makeText(context.getApplicationContext(), "Só é possível adicionar produtos ao Carrinho do mesmo Restaurante!", Toast.LENGTH_SHORT).show();
-        }*/
     }
 }
