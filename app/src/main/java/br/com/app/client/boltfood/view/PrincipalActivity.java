@@ -123,7 +123,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         storageReference.child(Constantes.CAMINHO_IMAGEM_PERFIL + auth.getUid() + ".png").getDownloadUrl().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "onFailure", Toast.LENGTH_LONG).show();
                 Log.d("error:", e.toString());
                 imagemUsuario.setImageResource(R.drawable.padrao);
             }
@@ -132,7 +131,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
             public void onSuccess(Uri uri) {
                 Toast.makeText(getApplicationContext(), "onSuccess", Toast.LENGTH_LONG).show();
                 if (uri != null && !uri.equals("")) {
-                    Toast.makeText(getApplicationContext(), "if onSuccess", Toast.LENGTH_LONG).show();
                     Glide.with(getApplicationContext()).load(uri.toString()).into(imagemUsuario);
                 }
             }

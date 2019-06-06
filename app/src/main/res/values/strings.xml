@@ -48,6 +48,7 @@
     <string name="usuarionaocadastrado">Usuário não cadastrado. Tente novamente!</string>
 
     <string name="salvar">Salvar</string>
+    <string name="carregando">Carregando...</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="action_settings">Settings</string>

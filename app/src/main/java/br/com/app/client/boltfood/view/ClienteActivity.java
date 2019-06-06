@@ -3,6 +3,7 @@ package br.com.app.client.boltfood.view;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -76,6 +77,8 @@ public class ClienteActivity extends AppCompatActivity {
     private String idUsuario = "";
     private Bitmap imgPerfil;
 
+    private ProgressDialog progress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +115,13 @@ public class ClienteActivity extends AppCompatActivity {
             return;
         }
 
+        progress = new ProgressDialog(this);
+        progress.setMessage(getString(R.string.carregando));
+        progress.setIndeterminate(true);
+        progress.setCancelable(false);
+        progress.show();
+
+
         auth.createUserWithEmailAndPassword(emailCliente.getText().toString(), senhaCliente.getText().toString())
                 .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
                     @Override
@@ -137,6 +147,7 @@ public class ClienteActivity extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), getString(R.string.cadastroefetuadocomsucesso), Toast.LENGTH_LONG).show();
                         } else {
+                            progress.dismiss();
                             Toast.makeText(getApplicationContext(), getString(R.string.usuarionaocadastrado), Toast.LENGTH_LONG).show();
                         }
                     }
@@ -266,11 +277,11 @@ public class ClienteActivity extends AppCompatActivity {
     }
 
     private void carregaLogin(){
+        progress.dismiss();
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
         finish();
     }
-
 
     private void atualizarFoto(Uri url){
 

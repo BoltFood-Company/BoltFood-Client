@@ -8,188 +8,191 @@
     tools:context=".view.ClienteActivity"
     android:fillViewport="true">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.ClienteActivity">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imagemPerfilAlteracao"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:onClick="tirarFoto"
-            android:src="@drawable/padrao"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="1dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".view.ClienteActivity">
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
 
-        <EditText
-            android:id="@+id/nomeClienteEditText"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:fontFamily="sans-serif"
-            android:hint="@string/nome"
-            android:inputType="textPersonName"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
-            app:layout_constraintVertical_bias="0.0" />
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imagemPerfilAlteracao"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="tirarFoto"
+                android:src="@drawable/padrao"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
-            android:id="@+id/documentoEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:hint="@string/cpf"
-            android:inputType="number"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/nomeClienteEditText"
-            app:layout_constraintStart_toStartOf="@+id/nomeClienteEditText"
-            app:layout_constraintTop_toBottomOf="@+id/nomeClienteEditText"
-            app:layout_constraintVertical_bias="0.0" />
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
 
-        <EditText
-            android:id="@+id/dataNascimentoEditText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:hint="@string/datanascimento"
-            android:inputType="date"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/documentoEditText"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/documentoEditText"
-            app:layout_constraintTop_toBottomOf="@+id/documentoEditText"
-            app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/nomeClienteEditText"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:fontFamily="sans-serif"
+                android:hint="@string/nome"
+                android:inputType="textPersonName"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline2"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
-            android:id="@+id/telefoneEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:hint="@string/telefone"
-            android:inputType="phone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/documentoEditText"
-            app:layout_constraintStart_toStartOf="@+id/dataNascimentoEditText"
-            app:layout_constraintTop_toBottomOf="@+id/dataNascimentoEditText"
-            app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/documentoEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/cpf"
+                android:inputType="number"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/nomeClienteEditText"
+                app:layout_constraintStart_toStartOf="@+id/nomeClienteEditText"
+                app:layout_constraintTop_toBottomOf="@+id/nomeClienteEditText"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <Spinner
-            android:id="@+id/sexoSpinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:addStatesFromChildren="false"
-            android:backgroundTint="@color/colorPrimaryLigth"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/telefoneEditText"
-            app:layout_constraintStart_toStartOf="@+id/telefoneEditText"
-            app:layout_constraintTop_toBottomOf="@+id/telefoneEditText"
-            app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/dataNascimentoEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/datanascimento"
+                android:inputType="date"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/documentoEditText"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/documentoEditText"
+                app:layout_constraintTop_toBottomOf="@+id/documentoEditText"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
-            android:id="@+id/emailEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/sexoSpinner"
-            app:layout_constraintStart_toStartOf="@+id/sexoSpinner"
-            app:layout_constraintTop_toBottomOf="@+id/sexoSpinner"
-            app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/telefoneEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/telefone"
+                android:inputType="phone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/documentoEditText"
+                app:layout_constraintStart_toStartOf="@+id/dataNascimentoEditText"
+                app:layout_constraintTop_toBottomOf="@+id/dataNascimentoEditText"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
-            android:id="@+id/confirmacaoEmailEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:hint="@string/confirmacaoemail"
-            android:inputType="textEmailAddress"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/emailEditText"
-            app:layout_constraintStart_toStartOf="@+id/emailEditText"
-            app:layout_constraintTop_toBottomOf="@+id/emailEditText"
-            app:layout_constraintVertical_bias="0.0" />
+            <Spinner
+                android:id="@+id/sexoSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:addStatesFromChildren="false"
+                android:backgroundTint="@color/colorPrimaryLigth"
+                android:spinnerMode="dropdown"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/telefoneEditText"
+                app:layout_constraintStart_toStartOf="@+id/telefoneEditText"
+                app:layout_constraintTop_toBottomOf="@+id/telefoneEditText"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:hint="@string/senha"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/confirmacaoEmailEditText"
-            app:layout_constraintStart_toStartOf="@+id/confirmacaoEmailEditText"
-            app:layout_constraintTop_toBottomOf="@+id/confirmacaoEmailEditText"
-            app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/sexoSpinner"
+                app:layout_constraintStart_toStartOf="@+id/sexoSpinner"
+                app:layout_constraintTop_toBottomOf="@+id/sexoSpinner"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
-            android:id="@+id/confirmacaoSenhaEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:hint="@string/confirmacaosenha"
-            android:inputType="textPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
-            app:layout_constraintStart_toStartOf="@+id/passwordEditText"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
-            app:layout_constraintVertical_bias="0.0" />
+            <EditText
+                android:id="@+id/confirmacaoEmailEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/confirmacaoemail"
+                android:inputType="textEmailAddress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/emailEditText"
+                app:layout_constraintStart_toStartOf="@+id/emailEditText"
+                app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+                app:layout_constraintVertical_bias="0.0" />
 
-        <Button
-            android:id="@+id/cadastrarButton"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:onClick="cadastrar"
-            android:text="@string/cadastrar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/confirmacaoSenhaEditText"
-            app:layout_constraintStart_toStartOf="@+id/confirmacaoSenhaEditText"
-            app:layout_constraintTop_toBottomOf="@+id/confirmacaoSenhaEditText"
-            tools:text="@string/cadastrar" />
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/senha"
+                android:inputType="textPassword"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/confirmacaoEmailEditText"
+                app:layout_constraintStart_toStartOf="@+id/confirmacaoEmailEditText"
+                app:layout_constraintTop_toBottomOf="@+id/confirmacaoEmailEditText"
+                app:layout_constraintVertical_bias="0.0" />
 
-    </android.support.constraint.ConstraintLayout>
+            <EditText
+                android:id="@+id/confirmacaoSenhaEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/confirmacaosenha"
+                android:inputType="textPassword"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
+                app:layout_constraintStart_toStartOf="@+id/passwordEditText"
+                app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <Button
+                android:id="@+id/cadastrarButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="cadastrar"
+                android:text="@string/cadastrar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/confirmacaoSenhaEditText"
+                app:layout_constraintStart_toStartOf="@+id/confirmacaoSenhaEditText"
+                app:layout_constraintTop_toBottomOf="@+id/confirmacaoSenhaEditText"
+                tools:text="@string/cadastrar" />
+
+        </android.support.constraint.ConstraintLayout>
+
 </ScrollView>
