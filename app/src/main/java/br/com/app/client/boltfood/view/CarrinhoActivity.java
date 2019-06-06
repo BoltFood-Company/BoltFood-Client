@@ -13,9 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -23,13 +20,11 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.CarrinhoAdapter;
 import br.com.app.client.boltfood.controller.PedidoController;
-import br.com.app.client.boltfood.controller.ResumoPedidoAdapter;
 import br.com.app.client.boltfood.model.entity.Pedido;
 import br.com.app.client.boltfood.model.entity.Produto;
 import br.com.app.client.boltfood.view.util.Constantes;

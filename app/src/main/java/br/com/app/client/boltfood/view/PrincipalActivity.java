@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.support.v7.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -39,7 +38,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
 import br.com.app.client.boltfood.R;
@@ -115,7 +113,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         super.onResume();
         carregaImagem();
         carregaCliente();
-
     }
 
     private void carregaImagem(){
@@ -129,7 +126,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         }).addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Toast.makeText(getApplicationContext(), "onSuccess", Toast.LENGTH_LONG).show();
                 if (uri != null && !uri.equals("")) {
                     Glide.with(getApplicationContext()).load(uri.toString()).into(imagemUsuario);
                 }
@@ -267,7 +263,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                         String imagemRestaurante = adapter.getItem(position).getUrl();
                         String bgRestaurante = adapter.getItem(position).geturlBg();
 
-                        Toast.makeText(PrincipalActivity.this, id, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
 
                         intent.putExtra("idRestaurante",id);
@@ -287,7 +282,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
                         String imagemRestaurante = adapter.getItem(position).getUrl();
                         String bgRestaurante = adapter.getItem(position).geturlBg();
 
-                        Toast.makeText(PrincipalActivity.this, id, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
 
                         intent.putExtra("idRestaurante",id);

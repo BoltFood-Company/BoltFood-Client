@@ -17,7 +17,6 @@ import br.com.app.client.boltfood.R;
 public class ResetSenhaActivity extends AppCompatActivity {
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-    private ProgressBar progressBarResetSenha;
 
     private EditText email;
 
