@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="left"
-                    android:text="Preço Total:  "
+                    android:text="@string/precototal"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp" />
 
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
-                android:text="Itens:"
+                android:text="@string/itens"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18dp"
                 tools:visibility="visible" />
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/buttonRealizarPedido"
                 android:layout_gravity="bottom|center"
-                android:text="Finalizar Pedido" />
+                android:text="@string/finalizarpedido" />
 
         </LinearLayout>
 

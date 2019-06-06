@@ -59,7 +59,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Carrinho");
+        getSupportActionBar().setTitle(getString(R.string.carrinho));
 
         progressBarLoadCarrinho = findViewById(R.id.progressBarLoadCarrinho);
 
@@ -121,14 +121,14 @@ public class CarrinhoActivity extends AppCompatActivity {
     public static int adicionarProduto(Produto produto, Context context) {
         if (produtos.isEmpty()) {
             produtos.add(produto);
-            //Toast.makeText(context.getApplicationContext(), "Produto adicionado ao Carrinho!", Toast.LENGTH_SHORT).show();
             return Constantes.PRODUTO_ADICIONADO;
         }
 
-        try {
+
 
             if (!produto.getIdRestaurante().getId().equals(produtos.get(0).getIdRestaurante().getId())) {
-                throw new RuntimeException();
+                Toast.makeText(context.getApplicationContext(), R.string.impossiveladicionaraocarrinho, Toast.LENGTH_SHORT).show();
+                return Constantes.PRODUTO_RESTAURANTE_DIFERENTE;
             }
 
             boolean existeLista = false;
@@ -138,20 +138,15 @@ public class CarrinhoActivity extends AppCompatActivity {
                     if (p.getQtde() + produto.getQtde() <= p.getQtdeEstoque()) {
                         p.setQtde(p.getQtde() + produto.getQtde());
                     } else {
-                        throw new RuntimeException();
+                        Toast.makeText(context.getApplicationContext(), R.string.quantidadeacimadovalordisponivel, Toast.LENGTH_SHORT).show();
+                        return Constantes.PRODUTO_SEM_ESTOQUE;
                     }
                 }
             }
+
             if (!existeLista) {
                 produtos.add(produto);
-
             }
             return Constantes.PRODUTO_ADICIONADO;
-
-        } catch (RuntimeException e) {
-            Toast.makeText(context.getApplicationContext(), "Quantidade acima do valor disponível!", Toast.LENGTH_SHORT).show();
-            return Constantes.PRODUTO_SEM_ESTOQUE;
-        }
-
     }
 }
