@@ -1,12 +1,11 @@
 package br.com.app.client.boltfood.model.entity;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import java.io.Serializable;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+
 
 public class Produto implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -19,21 +18,19 @@ public class Produto implements Serializable {
     private long qtdeEstoque;
     private long qtde;
 
-    private String restauranteId;
-
-    private Set<ItemPedido> itens = new HashSet<>();
+    private DocumentReference idRestaurante;
 
     public Produto() {
 
     }
 
-    public Produto(long qtde, String id, String nome, String descricao, long preco, long qtdeEstoque, String restauranteId, String url) {
+    public Produto(long qtde, String id, String nome, String descricao, long preco, long qtdeEstoque, DocumentReference restauranteId, String url) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.qtdeEstoque = qtdeEstoque;
-        this.restauranteId = restauranteId;
+        this.idRestaurante = restauranteId;
         this.url = url;
         this.qtde = qtde;
     }
@@ -44,14 +41,6 @@ public class Produto implements Serializable {
 
     public void setQtde(long qtde) {
         this.qtde = qtde;
-    }
-
-    public List<Pedido> getPedidos() {
-        List<Pedido> pedidos = new ArrayList<>();
-        for (ItemPedido item : itens) {
-            pedidos.add(item.getPedido());
-        }
-        return pedidos;
     }
 
     public String getUrl() {
@@ -107,26 +96,20 @@ public class Produto implements Serializable {
         this.qtdeEstoque = qtdeEstoque;
     }
 
-    public String getRestauranteId() {
-        return restauranteId;
+    public DocumentReference getIdRestaurante() {
+        return idRestaurante;
     }
 
-    public void setRestauranteId(String restauranteId) {
-        this.restauranteId = restauranteId;
+    public void setIdRestaurante(DocumentReference idRestaurante) {
+        this.idRestaurante = idRestaurante;
     }
 
-    public Set<ItemPedido> getItens() {
-        return itens;
-    }
 
-    public void setItens(Set<ItemPedido> itens) {
-        this.itens = itens;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Produto)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
         return Objects.equals(id, produto.id);
     }

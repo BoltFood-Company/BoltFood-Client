@@ -1,15 +1,10 @@
 package br.com.app.client.boltfood.view;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -45,6 +45,10 @@ public class CarrinhoActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private CarrinhoAdapter listaAdapater;
+
+    private DocumentReference idRestaurante;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private long totalPedido = 0;
 
@@ -87,14 +91,19 @@ public class CarrinhoActivity extends AppCompatActivity {
                 FirebaseAuth auth = FirebaseAuth.getInstance();
 
                 Pedido pedido = new Pedido();
-
-                pedido.setIdcliente(auth.getUid());
+                pedido.setIdCliente(auth.getUid());
                 pedido.setData(new Date());
                 pedido.setPedidoItem(produtos);
                 pedido.setNumeroPedido(new Random().nextInt(1000) + 1);
                 pedido.setTotalPedido(totalPedido);
+                idRestaurante = db.document("Restaurante/" + produtos.get(0).getIdRestaurante().getId());
+                pedido.setIdRestaurante(idRestaurante);
 
                 new PedidoController().inserir(pedido);
+
+                produtos.clear();
+
+                finish();
             }
         });
 
@@ -117,20 +126,25 @@ public class CarrinhoActivity extends AppCompatActivity {
         }
 
         try {
+
+            if (!produto.getIdRestaurante().getId().equals(produtos.get(0).getIdRestaurante().getId())) {
+                throw new RuntimeException();
+            }
+
             boolean existeLista = false;
             for (Produto p : produtos) {
                 if (p.equals(produto)) {
                     existeLista = true;
                     if (p.getQtde() + produto.getQtde() <= p.getQtdeEstoque()) {
                         p.setQtde(p.getQtde() + produto.getQtde());
-                    }
-                    else {
+                    } else {
                         throw new RuntimeException();
                     }
                 }
             }
             if (!existeLista) {
                 produtos.add(produto);
+
             }
             return Constantes.PRODUTO_ADICIONADO;
 
@@ -138,5 +152,6 @@ public class CarrinhoActivity extends AppCompatActivity {
             Toast.makeText(context.getApplicationContext(), "Quantidade acima do valor disponível!", Toast.LENGTH_SHORT).show();
             return Constantes.PRODUTO_SEM_ESTOQUE;
         }
+
     }
 }
