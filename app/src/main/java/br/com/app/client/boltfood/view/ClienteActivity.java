@@ -3,12 +3,10 @@ package br.com.app.client.boltfood.view;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,8 +40,7 @@ import java.util.List;
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.ClienteController;
 import br.com.app.client.boltfood.model.entity.Cliente;
-import br.com.app.client.boltfood.model.entity.enums.Sexo;
-import br.com.app.client.boltfood.view.util.Documento;
+import br.com.app.client.boltfood.view.util.Constantes;
 import br.com.app.client.boltfood.view.util.Mascara;
 import br.com.app.client.boltfood.view.util.Permissao;
 import br.com.app.client.boltfood.view.util.Validacao;
@@ -56,9 +52,6 @@ public class ClienteActivity extends AppCompatActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA
     };
-
-    public static final int TIRAR_FOTO_CAMERA = 1;
-    public static final int PEGAR_FOTO_GALERIA = 2;
 
     private EditText nomeCliente;
     private EditText documentoCliente;
@@ -77,8 +70,8 @@ public class ClienteActivity extends AppCompatActivity {
 
     private final String[] sexos = new String[] { "Selecione", "Masculilno", "Feminino", "Outro" };
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     private String idUsuario = "";
     private Bitmap imgPerfil;
@@ -99,7 +92,7 @@ public class ClienteActivity extends AppCompatActivity {
         senhaCliente = findViewById(R.id.passwordEditText);
         confirmacaoSenhaCliente = findViewById(R.id.confirmacaoSenhaEditText);
         sexoCliente = findViewById(R.id.sexoSpinner);
-        imagemUsuario = findViewById(R.id.usuarioPerfilImage);
+        imagemUsuario = findViewById(R.id.imagemPerfilAlteracao);
 
         carregaSexos();
 
@@ -143,9 +136,6 @@ public class ClienteActivity extends AppCompatActivity {
                             salvarImagemStorage();
 
                             Toast.makeText(getApplicationContext(), getString(R.string.cadastroefetuadocomsucesso), Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            startActivity(intent);
-                            finish();
                         } else {
                             Toast.makeText(getApplicationContext(), getString(R.string.usuarionaocadastrado), Toast.LENGTH_LONG).show();
                         }
@@ -237,7 +227,7 @@ public class ClienteActivity extends AppCompatActivity {
 
     public void tirarFoto(View view){
         Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivityForResult(cameraIntent, TIRAR_FOTO_CAMERA);
+        startActivityForResult(cameraIntent, Constantes.TIRAR_FOTO_CAMERA);
     }
 
     public void selecionarFotoGaleria(View view){
@@ -245,33 +235,42 @@ public class ClienteActivity extends AppCompatActivity {
     }
 
     private void salvarImagemStorage() {
-        //recuperar imagem
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imgPerfil.compress(Bitmap.CompressFormat.PNG, 80, baos);
-        byte[] dadosImagem = baos.toByteArray();
+        try{
+            //recuperar imagem
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imgPerfil.compress(Bitmap.CompressFormat.PNG, 90, baos);
+            byte[] dadosImagem = baos.toByteArray();
+            baos.close();
 
-        //salvar no firebase
-        StorageReference imagemRef = storageReference
-                .child("imagens")
-                .child("perfil")
-                .child(idUsuario + ".png");
+            //salvar no firebase
+            StorageReference imagemRef = storageReference
+                    .child("imagens")
+                    .child("perfil")
+                    .child(idUsuario + ".png");
 
-        UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Falha ao fazer upload da imagem", Toast.LENGTH_LONG).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(getApplicationContext(), "Sucesso ao fazer upload da imagem", Toast.LENGTH_LONG).show();
+            UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    carregaLogin();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    carregaLogin();
+                }
+            });
+        } catch (Exception e) {
 
-                Uri url = taskSnapshot.getUploadSessionUri();
-                //atualizarFoto(url);
-            }
-        });
+        }
     }
+
+    private void carregaLogin(){
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     private void atualizarFoto(Uri url){
 
@@ -297,7 +296,7 @@ public class ClienteActivity extends AppCompatActivity {
 
         if(resultCode != Activity.RESULT_CANCELED) {
             switch (requestCode){
-                case TIRAR_FOTO_CAMERA:
+                case Constantes.TIRAR_FOTO_CAMERA:
 
                     if (data != null){
                         Bundle bundle = data.getExtras();
@@ -309,7 +308,7 @@ public class ClienteActivity extends AppCompatActivity {
 
                     break;
 
-                case PEGAR_FOTO_GALERIA:
+                case Constantes.PEGAR_FOTO_GALERIA:
 
                     break;
             }

@@ -1,6 +1,10 @@
 package br.com.app.client.boltfood.view;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,17 +13,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,20 +39,24 @@ import java.util.List;
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.ClienteController;
 import br.com.app.client.boltfood.model.entity.Cliente;
+import br.com.app.client.boltfood.view.util.Constantes;
 
 public class AlteracaoClienteActivity extends AppCompatActivity {
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
     private EditText nome;
     private EditText telefone;
     private EditText documento;
     private EditText dataNascimento;
     private Spinner sexo;
+    private ImageView imagemUsuario;
 
     private String idDocumentCliente = "";
-    private Cliente cliente;
+    private Bitmap imgPerfil;
 
     private final String[] sexos = new String[] { "Selecione", "Masculino", "Feminino", "Outro" };
 
@@ -58,9 +74,37 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
         documento = findViewById(R.id.documentoAlteracaoEditText);
         dataNascimento = findViewById(R.id.dataNascimentoAlteracaoEditText);
         sexo = findViewById(R.id.sexoAlteracaoClienteSpinner);
+        imagemUsuario = findViewById(R.id.imagemPerfilAlteracao);
 
+        carregaImagem();
         carregaSexos();
         carregaCliente();
+    }
+
+    private void carregaImagem(){
+
+        storageReference.child(Constantes.CAMINHO_IMAGEM_PERFIL + auth.getUid() + ".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(getApplicationContext()).load(uri.toString()).into(imagemUsuario);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                imagemUsuario.setImageResource(R.drawable.padrao);
+            }
+        });
+
+/*
+        storageReference.child(Constantes.CAMINHO_IMAGEM_PERFIL + auth.getUid() + ".png").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (!task.getResult().toString().equals(""))
+                    Glide.with(getApplicationContext()).load(task.getResult().toString()).into(imagemUsuario);
+                else
+                    imagemUsuario.setImageResource(R.drawable.padrao);
+            }
+        });*/
     }
 
     @Override
@@ -136,6 +180,7 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
         ClienteController clienteController = new ClienteController();
         if (clienteController.alterarCliente(idDocumentCliente, alterarCliente) > 0) {
             Toast.makeText(getApplicationContext(), "Cadastro atualizado!", Toast.LENGTH_LONG).show();
+            salvarImagemStorage();
         } else {
             Toast.makeText(getApplicationContext(), "Não foi possível atualizar. Tente mais tarde!", Toast.LENGTH_LONG).show();
         }
@@ -173,5 +218,61 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
 
         sexoSpinnerArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         sexo.setAdapter(sexoSpinnerArrayAdapter);
+    }
+
+    public void tirarFoto(View view){
+        Intent cameraIntent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivityForResult(cameraIntent, Constantes.TIRAR_FOTO_CAMERA);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+
+        if(resultCode != Activity.RESULT_CANCELED) {
+            switch (requestCode){
+                case Constantes.TIRAR_FOTO_CAMERA:
+
+                    if (data != null){
+                        Bundle bundle = data.getExtras();
+                        if (bundle != null){
+                            imgPerfil = (Bitmap) bundle.get("data");
+                            imagemUsuario.setImageBitmap(imgPerfil);
+                            salvarImagemStorage();
+                        }
+                    }
+
+                    break;
+
+                case Constantes.PEGAR_FOTO_GALERIA:
+
+                    break;
+            }
+        }
+    }
+
+    private void salvarImagemStorage() {
+
+        try{
+            //recuperar imagem
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imgPerfil.compress(Bitmap.CompressFormat.PNG, 90, baos);
+            byte[] dadosImagem = baos.toByteArray();
+            baos.close();
+
+            //salvar no firebase
+            StorageReference imagemRef = storageReference
+                    .child("imagens").child("perfil")
+                    .child(auth.getUid() + ".png");
+
+            UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Falha ao fazer upload da imagem", Toast.LENGTH_LONG).show();
+                }
+            });
+        } catch (Exception ex) {
+
+        }
     }
 }

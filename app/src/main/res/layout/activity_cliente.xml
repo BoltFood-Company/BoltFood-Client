@@ -14,7 +14,7 @@
         tools:context=".view.ClienteActivity">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/usuarioPerfilImage"
+            android:id="@+id/imagemPerfilAlteracao"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_marginStart="8dp"
@@ -30,6 +30,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
 
         <EditText
             android:id="@+id/nomeClienteEditText"
@@ -183,13 +190,6 @@
             app:layout_constraintStart_toStartOf="@+id/confirmacaoSenhaEditText"
             app:layout_constraintTop_toBottomOf="@+id/confirmacaoSenhaEditText"
             tools:text="@string/cadastrar" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

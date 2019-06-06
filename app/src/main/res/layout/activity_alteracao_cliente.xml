@@ -11,12 +11,36 @@
         android:layout_height="match_parent"
         tools:context=".view.AlteracaoClienteActivity">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imagemPerfilAlteracao"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="tirarFoto"
+            android:src="@drawable/padrao"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.25" />
+
         <EditText
             android:id="@+id/nomeAlteracaoClienteEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
@@ -26,7 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline3"
             app:layout_constraintVertical_bias="0.0" />
 
         <EditText
@@ -92,7 +116,7 @@
             android:id="@+id/salvarButton"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
             android:onClick="alterarCadastro"
             android:text="@string/salvar"
@@ -100,6 +124,7 @@
             app:layout_constraintEnd_toEndOf="@+id/sexoAlteracaoClienteSpinner"
             app:layout_constraintStart_toStartOf="@+id/sexoAlteracaoClienteSpinner"
             app:layout_constraintTop_toBottomOf="@+id/sexoAlteracaoClienteSpinner"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="@string/salvar" />
 
     </android.support.constraint.ConstraintLayout>

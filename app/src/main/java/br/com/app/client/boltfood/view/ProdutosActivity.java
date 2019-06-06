@@ -2,28 +2,21 @@ package br.com.app.client.boltfood.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -31,10 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.Request;
 import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -44,18 +34,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import org.w3c.dom.Comment;
-
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.PrincipalController;
 import br.com.app.client.boltfood.controller.ProdutosHolder;
-import br.com.app.client.boltfood.controller.RestauranteHolder;
 import br.com.app.client.boltfood.model.entity.Produto;
-import br.com.app.client.boltfood.model.entity.Restaurante;
 
 public class ProdutosActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
-
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private RecyclerView listaRecycler;
 
@@ -110,7 +94,7 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
             headerNome.setText(nomeRestaurante);
             headerEstrela.setText(notaRestaurante);
             Glide.with(getApplicationContext()).load(imagemRestaurante).into(headerImagem);
-            Glide.with(this).load(bgRestaurante).into(new SimpleTarget<Drawable>() {
+            Glide.with(this).load(bgRestaurante).centerCrop().into(new SimpleTarget<Drawable>() {
                 @Override
                 public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {

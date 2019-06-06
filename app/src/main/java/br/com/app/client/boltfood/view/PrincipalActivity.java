@@ -2,9 +2,9 @@ package br.com.app.client.boltfood.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.support.v7.widget.SearchView;
 import android.widget.TextView;
@@ -28,6 +29,8 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -36,6 +39,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
 import br.com.app.client.boltfood.R;
@@ -43,7 +47,7 @@ import br.com.app.client.boltfood.controller.PrincipalController;
 import br.com.app.client.boltfood.controller.RestauranteHolder;
 import br.com.app.client.boltfood.model.entity.Cliente;
 import br.com.app.client.boltfood.model.entity.Restaurante;
-import de.hdodenhof.circleimageview.CircleImageView;
+import br.com.app.client.boltfood.view.util.Constantes;
 
 public class PrincipalActivity extends AppCompatActivity implements SearchView.OnQueryTextListener  {
 
@@ -63,7 +67,7 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
     private FirestoreRecyclerAdapter<Restaurante, RestauranteHolder> adapter;
 
     private TextView nomeUsuario, emailUsuario;
-    private CircleImageView imagemUsuario;
+    private ImageView imagemUsuario;
 
     private FrameLayout frameLayout;
 
@@ -91,6 +95,7 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         emailUsuario = nvDrawer.getHeaderView(0).findViewById(R.id.emailUsuarioTextView);
         imagemUsuario = nvDrawer.getHeaderView(0).findViewById(R.id.imagemDrawerCircleImageView);
 
+        carregaImagem();
         carregaCliente();
 
         controller = new PrincipalController();
@@ -103,29 +108,35 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         adapter = setAdapter(query);
         listaRecycler.setAdapter(adapter);
         adapter.startListening();
-
-        StorageReference pathRef = storageReference.child("imagens/perfil/" + auth.getUid() + ".png");
-        Log.d("LocalFoto", pathRef.getDownloadUrl().toString());
-        Log.d("LocalFoto", pathRef.getStorage().toString());
-
-
-
-        /*
-        //recuperar dados usuario
-        if (auth.getCurrentUser().getPhotoUrl() != null){
-            Glide.with(PrincipalActivity.this).load(auth.getCurrentUser().getPhotoUrl()).into(imagemUsuario);
-        } else {
-            imagemUsuario.setImageResource(R.drawable.padrao);
-        }
-        //auth.getCurrentUser().getpho
-        */
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+        carregaImagem();
         carregaCliente();
+
+    }
+
+    private void carregaImagem(){
+
+        storageReference.child(Constantes.CAMINHO_IMAGEM_PERFIL + auth.getUid() + ".png").getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "onFailure", Toast.LENGTH_LONG).show();
+                Log.d("error:", e.toString());
+                imagemUsuario.setImageResource(R.drawable.padrao);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Toast.makeText(getApplicationContext(), "onSuccess", Toast.LENGTH_LONG).show();
+                if (uri != null && !uri.equals("")) {
+                    Toast.makeText(getApplicationContext(), "if onSuccess", Toast.LENGTH_LONG).show();
+                    Glide.with(getApplicationContext()).load(uri.toString()).into(imagemUsuario);
+                }
+            }
+        });
     }
 
     public void selectItemDrawer(MenuItem menuItem) {

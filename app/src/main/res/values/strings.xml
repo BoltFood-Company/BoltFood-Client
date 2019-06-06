@@ -5,42 +5,22 @@
     <string name="cpf">CPF</string>
     <string name="datanascimento">Data de Nascimento</string>
     <string name="telefone">Telefone</string>
-    <string name="masculino">Masculino</string>
-    <string name="feminino">Feminino</string>
     <string name="email">E-mail</string>
     <string name="confirmacaoemail">Confirme seu e-mail</string>
     <string name="senha">Senha</string>
     <string name="confirmacaosenha">Confirme sua senha</string>
-    <string name="cadastrese">Cadastre-se</string>
     <string name="cadastrar">Cadastrar</string>
-    <string name="voltar">Voltar</string>
     <string name="login">Login</string>
     <string name="semcadastro">Não tem Cadastro ? Clique aqui.</string>
 
     <string name="validacaonome">Por favor, informe seu nome.</string>
-    <string name="validacaodocumento">Por favor, informe seu CPF.</string>
-    <string name="validacaotelefone">Por favor, informe seu telefone.</string>
-    <string name="validacaosexo">Por favor, informe seu sexo.</string>
     <string name="validacaoemail">Por favor, informe seu e-mail.</string>
-    <string name="validacaodatanascimento">Por favor, informe sua Data de Nascimento.</string>
-    <string name="validacaologin">Por favor, informe seu login.</string>
-    <string name="cpfinvalido">CPF inválido.</string>
     <string name="validacaosenha">Por favor, informe a senha.</string>
-    <string name="emailexistente">O e-mail informado, já está cadastrado.</string>
 
     <string name="validacaoconfirmacaoemail">Por favor, confirme seu e-mail.</string>
     <string name="validacaoconfirmacaosenha">Por favor, confirme sua senha.</string>
 
-    <string name="informativocartao">Digite as informações do cartão de crédito que você deseja usar para pagamento</string>
-
-    <string name="numerocartao">Número do cartão</string>
-    <string name="validadecartao">Validade</string>
-    <string name="cvccartao">CVC</string>
-    <string name="nomecartao">Nome no cartão</string>
-    <string name="documentotitularcartao">CPF do titular do cartão</string>
-
     <string name="descricaologoapp">Logo aplicativo</string>
-    <string name="caracteresSenha">informe mais de 6 caracteres na senha</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
 
@@ -58,7 +38,6 @@
     <string name="enviar">Enviar</string>
 
     <string name="recuperacaodesenha">Recuperação de Senha</string>
-    <string name="receberemailverificacao">Receber um e-mail para alteração de senha.</string>
     <string name="texto1descricaorecuperacao">Para receber um e-mail de alteração da sua senha, confirme aqui o seu endereço de e-mail.</string>
     <string name="texto2descricaorecuperacao">Em seguida, aguarde um momento e verifique sua caixa de entrada, caso você não receba, verifique a sua caixa de spam.</string>
     <string name="texto3descricaorecuperacao">Caso não tenha recebido o e-mail, tente novamente.</string>
@@ -72,20 +51,6 @@
     <string name="salvar">Salvar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_principal_navigation">PrincipalNavigationActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
 
 </resources>
