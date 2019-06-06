@@ -31,6 +31,8 @@ import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,6 +59,7 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
     private String imagemRestaurante;
 
     private List<Restaurante> listaRestaurante = new ArrayList<>();
+    private boolean rever = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +78,9 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
         historicoPedidoRecycler.setAdapter(adapter);
         adapter.startListening();
 
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -122,6 +127,7 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
                         holder.setIdRestaurante(model.getIdRestaurante().getId());
                         progressBar.setVisibility(View.INVISIBLE);
 
+
                     }
                 });
             }
@@ -137,6 +143,11 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
 
                     @Override
                     public void onItemClick(View view, int position) {
+
+                        if(rever == false) {
+                            Collections.reverse(listaRestaurante);
+                            rever = true;
+                        }
 
 
                         String id = adapter.getItem(position).getId();
@@ -156,6 +167,7 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
                         startActivity(intent);
 
                     }
+
 
                     @Override
                     public void onItemLongClick(View view, int position) {
