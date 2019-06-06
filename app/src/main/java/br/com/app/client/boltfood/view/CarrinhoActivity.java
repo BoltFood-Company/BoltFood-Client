@@ -86,10 +86,8 @@ public class CarrinhoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 Pedido pedido = new Pedido();
-                pedido.setIdcliente(auth.getUid());
+                pedido.setIdCliente(auth.getUid());
                 pedido.setData(new Date());
                 pedido.setPedidoItem(produtos);
                 pedido.setNumeroPedido(new Random().nextInt(1000) + 1);
@@ -124,9 +122,14 @@ public class CarrinhoActivity extends AppCompatActivity {
         }
 
         try {
+
+            if (!produto.getIdRestaurante().getId().equals(produtos.get(0).getIdRestaurante().getId())) {
+                throw new RuntimeException();
+            }
+
             boolean existeLista = false;
             for (Produto p : produtos) {
-                if (!p.equals(produto)) {
+                if (p.equals(produto)) {
                     existeLista = true;
                     if (p.getQtde() + produto.getQtde() <= p.getQtdeEstoque()) {
                         p.setQtde(p.getQtde() + produto.getQtde());
@@ -141,7 +144,8 @@ public class CarrinhoActivity extends AppCompatActivity {
             }
             Toast.makeText(context.getApplicationContext(), "Produto adicionado ao Carrinho!", Toast.LENGTH_SHORT).show();
         } catch (RuntimeException e) {
-            Toast.makeText(context.getApplicationContext(), "Quantidade acima do valor disponível!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context.getApplicationContext(), "Impossível adicionar ao Carrinho!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context.getApplicationContext(), "Quantidade acima do valor disponível!", Toast.LENGTH_SHORT).show();
         }
 
     }

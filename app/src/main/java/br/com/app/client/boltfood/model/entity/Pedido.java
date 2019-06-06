@@ -17,7 +17,7 @@ public class Pedido implements Serializable {
 
     private String id;
     private Date data;
-    private String idcliente;
+    private String idCliente;
     private DocumentReference idRestaurante;
     private List<Produto> PedidoItem;
     private long totalPedido;
@@ -28,8 +28,8 @@ public class Pedido implements Serializable {
 
     }
 
-    public Pedido(long numeroPedido, long totalPedido, String id,Date data, String idcliente, DocumentReference idRestaurante) {
-        this.idcliente = idcliente;
+    public Pedido(long numeroPedido, long totalPedido, String id,Date data, String idCliente, DocumentReference idRestaurante) {
+        this.idCliente = idCliente;
         this.id = id;
         this.totalPedido = totalPedido;
         this.numeroPedido = numeroPedido;
@@ -86,11 +86,11 @@ public class Pedido implements Serializable {
         this.id = id;
     }
 
-    public String getIdcliente() {
-        return idcliente;
+    public String getIdCliente() {
+        return idCliente;
     }
 
-    public void setIdcliente(String idcliente) {
-        this.idcliente = idcliente;
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 }
