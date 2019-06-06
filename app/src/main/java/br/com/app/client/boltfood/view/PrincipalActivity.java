@@ -49,7 +49,7 @@ import br.com.app.client.boltfood.model.entity.Cliente;
 import br.com.app.client.boltfood.model.entity.Restaurante;
 import br.com.app.client.boltfood.view.util.Constantes;
 
-public class PrincipalActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class PrincipalActivity extends AppCompatActivity implements SearchView.OnQueryTextListener  {
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -139,6 +139,12 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
 
     public void selectItemDrawer(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+
+            case R.id.carrinhoDrawerItem:
+                Intent intentCarrinho = new Intent(getApplicationContext(), CarrinhoActivity.class);
+                startActivity(intentCarrinho);
+                break;
+
             case R.id.pagamento:
                 Intent intentFormasPagamento = new Intent(getApplicationContext(), SelecaoCartaoActivity.class);
                 startActivity(intentFormasPagamento);

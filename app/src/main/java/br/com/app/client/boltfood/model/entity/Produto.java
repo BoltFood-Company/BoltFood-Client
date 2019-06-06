@@ -42,7 +42,7 @@ public class Produto implements Serializable {
         return qtde;
     }
 
-    public void setQtde(int qtde) {
+    public void setQtde(long qtde) {
         this.qtde = qtde;
     }
 
@@ -123,6 +123,16 @@ public class Produto implements Serializable {
         this.itens = itens;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Produto)) return false;
+        Produto produto = (Produto) o;
+        return Objects.equals(id, produto.id);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

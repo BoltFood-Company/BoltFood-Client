@@ -26,6 +26,7 @@
 
     <string name="formasdepagamento">Formas de Pagamento</string>
     <string name="pedidos">Pedidos</string>
+    <string name="carrinho">Carrinho</string>
     <string name="cadastro">Cadastro</string>
     <string name="configuraçoes">Configurações</string>
     <string name="sair">Sair</string>
