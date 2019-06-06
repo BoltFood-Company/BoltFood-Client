@@ -8,5 +8,6 @@ public class Constantes {
 
     public static final int PRODUTO_ADICIONADO = 1;
     public static final int PRODUTO_SEM_ESTOQUE = 2;
+    public static final int PRODUTO_RESTAURANTE_DIFERENTE = 3;
 
 }

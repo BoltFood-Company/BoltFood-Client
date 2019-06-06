@@ -58,6 +58,12 @@
     <string name="irparaocarrinho">Ir para o Carrinho</string>
     <string name="itemadicionadoaocarrinho">Item adicionado ao Carrinho!</string>
 
+    <string name="quantidadeacimadovalordisponivel">Quantidade acima do valor disponível!</string>
+    <string name="impossiveladicionaraocarrinho">Impossível adicionar ao Carrinho!</string>
+    <string name="precototal">Preço Total:</string>
+    <string name="itens">Itens:</string>
+    <string name="finalizarpedido">Finalizar Pedido</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="action_settings">Settings</string>
 

@@ -13,9 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -23,13 +20,11 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.CarrinhoAdapter;
 import br.com.app.client.boltfood.controller.PedidoController;
-import br.com.app.client.boltfood.controller.ResumoPedidoAdapter;
 import br.com.app.client.boltfood.model.entity.Pedido;
 import br.com.app.client.boltfood.model.entity.Produto;
 import br.com.app.client.boltfood.view.util.Constantes;
@@ -59,7 +54,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Carrinho");
+        getSupportActionBar().setTitle(getString(R.string.carrinho));
 
         progressBarLoadCarrinho = findViewById(R.id.progressBarLoadCarrinho);
 
@@ -121,14 +116,14 @@ public class CarrinhoActivity extends AppCompatActivity {
     public static int adicionarProduto(Produto produto, Context context) {
         if (produtos.isEmpty()) {
             produtos.add(produto);
-            //Toast.makeText(context.getApplicationContext(), "Produto adicionado ao Carrinho!", Toast.LENGTH_SHORT).show();
             return Constantes.PRODUTO_ADICIONADO;
         }
 
-        try {
+
 
             if (!produto.getIdRestaurante().getId().equals(produtos.get(0).getIdRestaurante().getId())) {
-                throw new RuntimeException();
+                Toast.makeText(context.getApplicationContext(), R.string.impossiveladicionaraocarrinho, Toast.LENGTH_SHORT).show();
+                return Constantes.PRODUTO_RESTAURANTE_DIFERENTE;
             }
 
             boolean existeLista = false;
@@ -138,20 +133,15 @@ public class CarrinhoActivity extends AppCompatActivity {
                     if (p.getQtde() + produto.getQtde() <= p.getQtdeEstoque()) {
                         p.setQtde(p.getQtde() + produto.getQtde());
                     } else {
-                        throw new RuntimeException();
+                        Toast.makeText(context.getApplicationContext(), R.string.quantidadeacimadovalordisponivel, Toast.LENGTH_SHORT).show();
+                        return Constantes.PRODUTO_SEM_ESTOQUE;
                     }
                 }
             }
+
             if (!existeLista) {
                 produtos.add(produto);
-
             }
             return Constantes.PRODUTO_ADICIONADO;
-
-        } catch (RuntimeException e) {
-            Toast.makeText(context.getApplicationContext(), "Quantidade acima do valor disponível!", Toast.LENGTH_SHORT).show();
-            return Constantes.PRODUTO_SEM_ESTOQUE;
-        }
-
     }
 }

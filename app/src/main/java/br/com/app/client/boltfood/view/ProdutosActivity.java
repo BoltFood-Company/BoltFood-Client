@@ -21,14 +21,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -192,7 +190,6 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
                         @Override
                         public void onItemClick(View view, int position) {
                             String id = adapter.getItem(position).getId();
-                            Toast.makeText(ProdutosActivity.this, id, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), ProdutoActivity.class);
                             intent.putExtra("idProduto",id);
                             startActivity(intent);
@@ -202,7 +199,6 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
                         @Override
                         public void onItemLongClick(View view, int position) {
                             String id = adapter.getItem(position).getId();
-                            Toast.makeText(ProdutosActivity.this, id, Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
                             intent.putExtra("idProduto",id);
                             startActivity(intent);
