@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.protobuf.StringValue;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 import br.com.app.client.boltfood.R;
@@ -43,6 +44,8 @@ public class ResumoPedidoActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private ResumoPedidoAdapter listaAdapater;
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
+
 
 
     @Override
@@ -67,7 +70,6 @@ public class ResumoPedidoActivity extends AppCompatActivity {
             String idPedido = (String) extras.get("idPedido");
             long numeroPedido = (long) extras.get("numeroPedido");
             String nomeRestaurante = (String) extras.get("nomeRestaurante");
-            String urlRestaurante = (String) extras.get("urlRestaurante");
             String totalPedido = (String) extras.get("totalPedido");
 
             nome.setText(nomeRestaurante);
@@ -167,7 +169,7 @@ public class ResumoPedidoActivity extends AppCompatActivity {
                 holder.setNome(model.getNome());
                 holder.setImagem(model.getUrl(), getApplicationContext());
                 holder.setId(DocumentId);
-                holder.setpreco(model.getPreco());
+                holder.setpreco(nf.format(model.getPreco()));
 
             }
         };

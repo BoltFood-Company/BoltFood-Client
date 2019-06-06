@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import org.w3c.dom.Text;
 
@@ -62,7 +63,7 @@ public class HistoricoPedidoHolder extends RecyclerView.ViewHolder {
     public void setDataDoPedido(String data){dataDoPedido.setText(data);}
     public void setIdRestaurante(String id) {idRestaurante.setText(id);}
     public void setImagem(String i, Context context) {
-        Glide.with(context).load(i).into(imagem);
+        Glide.with(context).load(i).apply(RequestOptions.circleCropTransform()).into(imagem);
     }
 
 

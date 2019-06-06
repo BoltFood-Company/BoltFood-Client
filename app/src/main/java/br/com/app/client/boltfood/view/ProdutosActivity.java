@@ -34,6 +34,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.text.NumberFormat;
+
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.PrincipalController;
 import br.com.app.client.boltfood.controller.ProdutosHolder;
@@ -50,6 +52,7 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
     private SearchView searchView;
     private FirestoreRecyclerAdapter<Produto, ProdutosHolder> adapter;
     private DocumentReference ref = db.document("");
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
 
     private TextView headerNome;
     private TextView headerEstrela;
@@ -220,7 +223,7 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
                 holder.setNome(model.getNome());
                 holder.setImagem(model.getUrl(), getApplicationContext());
                 holder.setId(DocumentId);
-                holder.setpreco(model.getPreco());
+                holder.setpreco(nf.format(model.getPreco()));
 
             }
         };

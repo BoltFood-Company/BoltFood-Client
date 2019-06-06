@@ -29,6 +29,7 @@ import com.google.protobuf.StringValue;
 
 import java.lang.reflect.Array;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,9 +51,12 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirestoreRecyclerAdapter<Pedido, HistoricoPedidoHolder> adapter;
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
 
     private String nomeRestaurante;
     private String imagemRestaurante;
+
+    private List<Restaurante> listaRestaurante = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,15 +106,17 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Restaurante restaurante = documentSnapshot.toObject(Restaurante.class);
 
+                        listaRestaurante.add(restaurante);
+
                         nomeRestaurante = restaurante.getNomeFantasia();
                         imagemRestaurante = restaurante.getUrl();
 
-                        holder.setImagem(imagemRestaurante,getApplicationContext());
+                        holder.setImagem(imagemRestaurante, getApplicationContext());
                         holder.setNomePedido(nomeRestaurante);
 
                         model.setId(DocumentId);
                         holder.setId(DocumentId);
-                        holder.setpreco("Total " + model.getTotalPedido());
+                        holder.setpreco(nf.format(model.getTotalPedido()));
 
                         holder.setDataDoPedido(DateFormat.getDateInstance().format(model.getData()));
                         holder.setIdRestaurante(model.getIdRestaurante().getId());
@@ -131,8 +137,11 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
 
                     @Override
                     public void onItemClick(View view, int position) {
+
+
                         String id = adapter.getItem(position).getId();
-                        String total = adapter.getItem(position).getTotalPedido();
+                        String total =  nf.format(adapter.getItem(position).getTotalPedido());
+                        String nome = listaRestaurante.get(position).getNomeFantasia();
                         long numeroPedido = adapter.getItem(position).getNumeroPedido();
 
 
@@ -140,7 +149,7 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
 
                         intent.putExtra("idPedido",id);
                         intent.putExtra("numeroPedido", numeroPedido);
-                        intent.putExtra("nomeRestaurante", nomeRestaurante);
+                        intent.putExtra("nomeRestaurante", nome);
                         intent.putExtra("urlRestaurante", imagemRestaurante);
                         intent.putExtra("totalPedido", total);
 

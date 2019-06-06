@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 import br.com.app.client.boltfood.R;
@@ -20,6 +21,8 @@ public class ResumoPedidoAdapter extends RecyclerView.Adapter<ResumoPedidoAdapte
 
     private List<Produto> listaProdutos;
     private Context mContext;
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
+
 
     public ResumoPedidoAdapter(List<Produto> lProdutos, Context context) {
         listaProdutos = lProdutos;
@@ -35,10 +38,13 @@ public class ResumoPedidoAdapter extends RecyclerView.Adapter<ResumoPedidoAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ResumoPedidoAdapter.ViewHolder viewHolder, int i) {
+        String nome = listaProdutos.get(i).getNome();
+        String preco = nf.format(listaProdutos.get(i).getPreco());
+        String qtde = listaProdutos.get(i).getQtde()+ " X ";
 
-        viewHolder.nome.setText(listaProdutos.get(i).getNome());
-        viewHolder.preco.setText(listaProdutos.get(i).getPreco());
-        viewHolder.qtde.setText(listaProdutos.get(i).getQtde()+ " X ");
+        viewHolder.nome.setText(nome);
+        viewHolder.preco.setText(preco);
+        viewHolder.qtde.setText(qtde);
         Glide.with(mContext).load(listaProdutos.get(i).getUrl()).into(viewHolder.imagem);
 
     }
@@ -58,10 +64,10 @@ public class ResumoPedidoAdapter extends RecyclerView.Adapter<ResumoPedidoAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            nome = itemView.findViewById(R.id.nomeProdutoCarrinho);
-            imagem = itemView.findViewById(R.id.produtoImagemCarrinho);
-            preco = itemView.findViewById(R.id.precoProdutoCarrinho);
-            qtde = itemView.findViewById(R.id.qtdeProdutoCarrinho);
+            nome = itemView.findViewById(R.id.nomeProduto);
+            imagem = itemView.findViewById(R.id.produtoImagem);
+            preco = itemView.findViewById(R.id.precoProduto);
+            qtde = itemView.findViewById(R.id.qtdeProduto);
 
         }
     }

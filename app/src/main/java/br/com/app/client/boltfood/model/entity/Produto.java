@@ -75,9 +75,8 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getPreco() {
-        NumberFormat nf = NumberFormat.getCurrencyInstance();
-        return nf.format(preco);
+    public long getPreco() {
+        return preco;
     }
 
     public long getPrecoNumerico() {

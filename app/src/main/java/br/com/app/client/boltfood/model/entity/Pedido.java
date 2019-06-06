@@ -22,13 +22,14 @@ public class Pedido implements Serializable {
     private List<Produto> PedidoItem;
     private long totalPedido;
     private long numeroPedido;
+    private String nomeRestaurante;
 
 
     public Pedido() {
 
     }
 
-    public Pedido(long numeroPedido, long totalPedido, String id,Date data, String idCliente, DocumentReference idRestaurante) {
+    public Pedido( String nomeRestaurante, long numeroPedido, long totalPedido, String id,Date data, String idCliente, DocumentReference idRestaurante) {
         this.idCliente = idCliente;
         this.id = id;
         this.totalPedido = totalPedido;
@@ -39,6 +40,14 @@ public class Pedido implements Serializable {
 
     public List<Produto> getPedidoItem() {
         return PedidoItem;
+    }
+
+    public String getNomeRestaurante() {
+        return nomeRestaurante;
+    }
+
+    public void setNomeRestaurante(String nomeRestaurante) {
+        this.nomeRestaurante = nomeRestaurante;
     }
 
     public void setPedidoItem(List<Produto> pedidoItem) {
@@ -73,9 +82,8 @@ public class Pedido implements Serializable {
         return id;
     }
 
-    public String getTotalPedido() {
-        NumberFormat nf = NumberFormat.getCurrencyInstance();
-        return nf.format(totalPedido);
+    public long getTotalPedido() {
+      return totalPedido;
     }
 
     public void setTotalPedido(long totalPedido) {

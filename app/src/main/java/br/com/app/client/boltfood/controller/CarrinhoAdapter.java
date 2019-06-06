@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.text.NumberFormat;
 import java.util.List;
 
 import br.com.app.client.boltfood.R;
@@ -22,7 +23,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
 
     private List<Produto> listaProdutos;
     private Context mContext;
-
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
 
     public CarrinhoAdapter(List<Produto> listaProdutos, Context mContext) {
         this.listaProdutos = listaProdutos;
@@ -40,7 +41,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
     public void onBindViewHolder(@NonNull CarrinhoAdapter.ViewHolder viewHolder, int i) {
 
         viewHolder.nome.setText(listaProdutos.get(i).getNome());
-        viewHolder.preco.setText(listaProdutos.get(i).getPreco());
+        viewHolder.preco.setText(nf.format(listaProdutos.get(i).getPreco()));
         viewHolder.qtde.setText(listaProdutos.get(i).getQtde()+ " X ");
         Glide.with(mContext).load(listaProdutos.get(i).getUrl()).into(viewHolder.imagem);
 
