@@ -1,7 +1,10 @@
 package br.com.app.client.boltfood.view;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -40,8 +43,14 @@ import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.controller.ClienteController;
 import br.com.app.client.boltfood.model.entity.Cliente;
 import br.com.app.client.boltfood.view.util.Constantes;
+import br.com.app.client.boltfood.view.util.Permissao;
 
 public class AlteracaoClienteActivity extends AppCompatActivity {
+
+    private String[] permissoesNecessarias = new String[] {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
+    };
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -64,6 +73,8 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alteracao_cliente);
+
+        Permissao.validarPermissoes(permissoesNecessarias, this, 2);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -274,5 +285,25 @@ public class AlteracaoClienteActivity extends AppCompatActivity {
         } catch (Exception ex) {
 
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        for (int permissaoResultado : grantResults) {
+            if (permissaoResultado == PackageManager.PERMISSION_DENIED){
+                alertaValidacaoPermissao();
+            }
+        }
+    }
+
+    private void alertaValidacaoPermissao(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setTitle("Permissão Negada");
+        builder.setMessage("Você não conseguirá vincular uma foto ao seu perfil");
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

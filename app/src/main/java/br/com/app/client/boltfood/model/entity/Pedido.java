@@ -22,8 +22,6 @@ public class Pedido implements Serializable {
     private List<Produto> PedidoItem;
     private long totalPedido;
     private long numeroPedido;
-    private String nomeRestaurante;
-
 
     public Pedido() {
 
@@ -40,14 +38,6 @@ public class Pedido implements Serializable {
 
     public List<Produto> getPedidoItem() {
         return PedidoItem;
-    }
-
-    public String getNomeRestaurante() {
-        return nomeRestaurante;
-    }
-
-    public void setNomeRestaurante(String nomeRestaurante) {
-        this.nomeRestaurante = nomeRestaurante;
     }
 
     public void setPedidoItem(List<Produto> pedidoItem) {

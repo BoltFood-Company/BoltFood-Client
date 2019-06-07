@@ -191,7 +191,9 @@
                 app:layout_constraintEnd_toEndOf="@+id/confirmacaoSenhaEditText"
                 app:layout_constraintStart_toStartOf="@+id/confirmacaoSenhaEditText"
                 app:layout_constraintTop_toBottomOf="@+id/confirmacaoSenhaEditText"
-                tools:text="@string/cadastrar" />
+                tools:text="@string/cadastrar"
+                android:background="@drawable/custom_button"
+                android:textColor="@color/white"/>
 
         </android.support.constraint.ConstraintLayout>
 

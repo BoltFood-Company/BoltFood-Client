@@ -55,11 +55,7 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
     private FirestoreRecyclerAdapter<Pedido, HistoricoPedidoHolder> adapter;
     private NumberFormat nf = NumberFormat.getCurrencyInstance();
 
-    private String nomeRestaurante;
     private String imagemRestaurante;
-
-    private List<Restaurante> listaRestaurante = new ArrayList<>();
-    private boolean rever = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +73,6 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
         adapter = setAdapter(query);
         historicoPedidoRecycler.setAdapter(adapter);
         adapter.startListening();
-
-
     }
 
 
@@ -111,13 +105,10 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         Restaurante restaurante = documentSnapshot.toObject(Restaurante.class);
 
-                        listaRestaurante.add(restaurante);
-
-                        nomeRestaurante = restaurante.getNomeFantasia();
                         imagemRestaurante = restaurante.getUrl();
 
                         holder.setImagem(imagemRestaurante, getApplicationContext());
-                        holder.setNomePedido(nomeRestaurante);
+                        holder.setNomePedido(model.getPedidoItem().get(0).getNomeRestaurante());
 
                         model.setId(DocumentId);
                         holder.setId(DocumentId);
@@ -126,12 +117,9 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
                         holder.setDataDoPedido(DateFormat.getDateInstance().format(model.getData()));
                         holder.setIdRestaurante(model.getIdRestaurante().getId());
                         progressBar.setVisibility(View.INVISIBLE);
-
-
                     }
                 });
             }
-
 
             @NonNull
             @Override
@@ -144,15 +132,9 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(View view, int position) {
 
-                        if(rever == false) {
-                            Collections.reverse(listaRestaurante);
-                            rever = true;
-                        }
-
-
                         String id = adapter.getItem(position).getId();
                         String total =  nf.format(adapter.getItem(position).getTotalPedido());
-                        String nome = listaRestaurante.get(position).getNomeFantasia();
+                        String nome = adapter.getItem(position).getPedidoItem().get(0).getNomeRestaurante();
                         long numeroPedido = adapter.getItem(position).getNumeroPedido();
 
 

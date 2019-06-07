@@ -38,12 +38,13 @@ public class ProdutoActivity extends AppCompatActivity {
     private Button buttonQtdeMais;
     private TextView textViewQuantidade;
     private Button buttonQtdeMenos;
-    private TextView textViewValorTotal;
+
     private Button buttonAdicionarProduto;
 
     private Produto produto;
     private int quantidade = 1;
     private long precoTotal;
+    private String nomeRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +62,15 @@ public class ProdutoActivity extends AppCompatActivity {
         buttonQtdeMais = findViewById(R.id.buttonQtdeMais);
         textViewQuantidade = findViewById(R.id.textViewQuantidade);
         buttonQtdeMenos = findViewById(R.id.buttonQtdeMenos);
-        textViewValorTotal = findViewById(R.id.textViewValorTotal);
+
         buttonAdicionarProduto = findViewById(R.id.buttonAdicionarProduto);
 
         Bundle extras = getIntent().getExtras();
         String idProduto;
         if(extras != null) {
             idProduto = extras.getString("idProduto");
+            nomeRestaurante = extras.getString("nomeRestaurante");
+            Toast.makeText(getApplicationContext(), nomeRestaurante, Toast.LENGTH_LONG);
 
             db.document("Produto/" + idProduto).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -85,7 +88,7 @@ public class ProdutoActivity extends AppCompatActivity {
                             textViewDescricaoProduto.setText(produto.getDescricao());
                             textViewQuantidade.setText(String.valueOf(quantidade));
                             precoTotal = produto.getPrecoNumerico();
-                            textViewValorTotal.setText(NumberFormat.getCurrencyInstance().format(precoTotal));
+                            buttonAdicionarProduto.setText("Adicionar " + NumberFormat.getCurrencyInstance().format(precoTotal));
                         }
                     }
                 }
@@ -99,7 +102,7 @@ public class ProdutoActivity extends AppCompatActivity {
                     quantidade--;
                     precoTotal -= produto.getPrecoNumerico();
                     textViewQuantidade.setText(String.valueOf(quantidade));
-                    textViewValorTotal.setText(NumberFormat.getCurrencyInstance().format(precoTotal));
+                    buttonAdicionarProduto.setText("Adicionar " + NumberFormat.getCurrencyInstance().format(precoTotal));
                 }
             }
         });
@@ -112,7 +115,7 @@ public class ProdutoActivity extends AppCompatActivity {
                     quantidade++;
                     precoTotal += produto.getPrecoNumerico();
                     textViewQuantidade.setText(String.valueOf(quantidade));
-                    textViewValorTotal.setText(NumberFormat.getCurrencyInstance().format(precoTotal));
+                    buttonAdicionarProduto.setText("Adicionar " + NumberFormat.getCurrencyInstance().format(precoTotal));
                 }
                 else
                     Toast.makeText(getApplicationContext(), getString(R.string.quantidademaximadisponivel), Toast.LENGTH_SHORT).show();
@@ -124,18 +127,20 @@ public class ProdutoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 produto.setQtde(quantidade);
+                produto.setNomeRestaurante(nomeRestaurante);
+                Toast.makeText(getApplicationContext(), "Produto: " + produto.getNomeRestaurante(), Toast.LENGTH_LONG);
                 int retorno = CarrinhoActivity.adicionarProduto(produto, getApplicationContext());
 
                 if (retorno == Constantes.PRODUTO_ADICIONADO){
                     Snackbar snackbar = Snackbar.make(v, "", Snackbar.LENGTH_LONG);
                     View view = snackbar.getView();
-                    view.setMinimumHeight(50);
+                    view.setMinimumHeight(70);
 
-                    view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.colorPrimaryDark));
-                    snackbar.setActionTextColor(Color.WHITE);
+                    view.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.color.amerelo_mostarda));
+                    snackbar.setActionTextColor(Color.BLACK);
 
                     TextView tv = view.findViewById(android.support.design.R.id.snackbar_text);
-                    tv.setTextColor(Color.WHITE);
+                    tv.setTextColor(Color.BLACK);
 
                     snackbar.setText(getString(R.string.itemadicionadoaocarrinho));
                     snackbar.setAction(getString(R.string.irparaocarrinho), new View.OnClickListener() {

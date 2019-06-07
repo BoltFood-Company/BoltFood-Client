@@ -125,7 +125,8 @@
             app:layout_constraintStart_toStartOf="@+id/sexoAlteracaoClienteSpinner"
             app:layout_constraintTop_toBottomOf="@+id/sexoAlteracaoClienteSpinner"
             app:layout_constraintVertical_bias="0.0"
-            tools:text="@string/salvar" />
+            android:background="@drawable/custom_button"
+            android:textColor="@color/white"/>
 
     </android.support.constraint.ConstraintLayout>
 

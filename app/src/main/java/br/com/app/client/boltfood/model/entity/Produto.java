@@ -20,6 +20,16 @@ public class Produto implements Serializable {
 
     private DocumentReference idRestaurante;
 
+    public String getNomeRestaurante() {
+        return nomeRestaurante;
+    }
+
+    public void setNomeRestaurante(String nomeRestaurante) {
+        this.nomeRestaurante = nomeRestaurante;
+    }
+
+    private String nomeRestaurante;
+
     public Produto() {
 
     }

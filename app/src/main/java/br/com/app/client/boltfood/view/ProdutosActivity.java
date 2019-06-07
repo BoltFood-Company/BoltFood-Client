@@ -57,6 +57,7 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
     private ImageView headerImagem;
     private LinearLayout header;
 
+    private String nomeRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,7 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
 
         if(extras != null) {
             String idRestaurante = (String) extras.get("idRestaurante");
-            String nomeRestaurante = (String) extras.get("nomeRestaurante");
+            nomeRestaurante = (String) extras.get("nomeRestaurante");
             String notaRestaurante = (String) extras.get("notaRestaurante");
             String imagemRestaurante = (String) extras.get("imagemRestaurante");
             String bgRestaurante = (String) extras.get("bgRestaurante");
@@ -192,6 +193,7 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
                             String id = adapter.getItem(position).getId();
                             Intent intent = new Intent(getApplicationContext(), ProdutoActivity.class);
                             intent.putExtra("idProduto",id);
+                            intent.putExtra("nomeRestaurante", nomeRestaurante);
                             startActivity(intent);
 
                         }
@@ -201,6 +203,7 @@ public class ProdutosActivity extends AppCompatActivity implements SearchView.On
                             String id = adapter.getItem(position).getId();
                             Intent intent = new Intent(getApplicationContext(), ProdutosActivity.class);
                             intent.putExtra("idProduto",id);
+                            intent.putExtra("nomeRestaurante", nomeRestaurante);
                             startActivity(intent);
 
                         }

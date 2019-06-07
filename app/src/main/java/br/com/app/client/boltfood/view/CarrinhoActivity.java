@@ -1,6 +1,7 @@
 package br.com.app.client.boltfood.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -95,14 +96,13 @@ public class CarrinhoActivity extends AppCompatActivity {
                 pedido.setIdRestaurante(idRestaurante);
 
                 new PedidoController().inserir(pedido);
-
+                Toast.makeText(getApplicationContext(), getString(R.string.pedidorealizadocomsucesso), Toast.LENGTH_LONG).show();
                 produtos.clear();
-
+                Intent principalIntent = new Intent(getApplicationContext(), PrincipalActivity.class);
+                startActivity(principalIntent);
                 finish();
             }
         });
-
-
     }
 
     @Override
@@ -118,8 +118,6 @@ public class CarrinhoActivity extends AppCompatActivity {
             produtos.add(produto);
             return Constantes.PRODUTO_ADICIONADO;
         }
-
-
 
             if (!produto.getIdRestaurante().getId().equals(produtos.get(0).getIdRestaurante().getId())) {
                 Toast.makeText(context.getApplicationContext(), R.string.impossiveladicionaraocarrinho, Toast.LENGTH_SHORT).show();

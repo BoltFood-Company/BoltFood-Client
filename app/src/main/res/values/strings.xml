@@ -63,6 +63,7 @@
     <string name="precototal">Preço Total:</string>
     <string name="itens">Itens:</string>
     <string name="finalizarpedido">Finalizar Pedido</string>
+    <string name="pedidorealizadocomsucesso">Pedido Realizado com Sucesso!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="action_settings">Settings</string>
