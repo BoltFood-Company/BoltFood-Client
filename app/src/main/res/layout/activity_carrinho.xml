@@ -1,93 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.CarrinhoActivity">
 
-    <RelativeLayout
+    <android.support.constraint.Guideline
+        android:id="@+id/esquerdaGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
 
-        android:layout_width="395dp"
-        android:layout_height="587dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
+    <android.support.constraint.Guideline
+        android:id="@+id/direitaGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <TextView
+        android:id="@+id/nomeRestauranteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nomeRestauranteGuideLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/esquerdaGuideLine"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/nomeRestauranteGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/totalGuideLine"
+        app:layout_constraintEnd_toEndOf="@+id/direitaGuideLine"
+        app:layout_constraintStart_toStartOf="@+id/esquerdaGuideLine"
+        app:layout_constraintTop_toTopOf="@+id/nomeRestauranteGuideLine"
         tools:ignore="MissingConstraints">
 
         <ProgressBar
             android:id="@+id/progressBarLoadCarrinho"
             style="?android:attr/progressBarStyle"
-            android:layout_width="98dp"
-            android:layout_height="129dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="232dp"
-            android:layout_marginEnd="147dp"
-            android:layout_marginBottom="226dp" />
+            android:layout_alignParentBottom="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textViewPrecoCarrinho"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="left"
-                    android:text="@string/precototal"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textViewPrecoTotalPedido"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="left"
-                    android:text=""
-                    android:textColor="@color/darkgray"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:text="@string/itens"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18dp"
-                tools:visibility="visible" />
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewCarrinho"
                 android:layout_width="match_parent"
-                android:layout_height="480dp">
+                android:layout_height="match_parent">
 
             </android.support.v7.widget.RecyclerView>
-
-            <Button
-                android:id="@+id/buttonRealizarPedido"
-                android:layout_width="217dp"
-                android:layout_height="36dp"
-                android:layout_alignBottom="@+id/buttonRealizarPedido"
-                android:layout_gravity="center|bottom"
-                android:text="@string/finalizarpedido"
-                android:textColor="@color/white"
-                android:background="@drawable/custom_button"
-                />
 
         </LinearLayout>
 
     </RelativeLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/totalGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <TextView
+        android:id="@+id/totalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/total"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/botaoGuideLine"
+        app:layout_constraintEnd_toStartOf="@+id/direitaGuideLine"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/esquerdaGuideLine"
+        app:layout_constraintTop_toTopOf="@+id/totalGuideLine" />
+
+    <TextView
+        android:id="@+id/valorTotalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/direitaGuideLine"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/totalGuideLine" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/botaoGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.92" />
+
+    <Button
+        android:id="@+id/buttonRealizarPedido"
+        android:layout_width="217dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/custom_button"
+        android:text="@string/finalizarpedido"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/direitaGuideLine"
+        app:layout_constraintStart_toStartOf="@+id/esquerdaGuideLine"
+        app:layout_constraintTop_toTopOf="@+id/botaoGuideLine"
+        app:layout_constraintVertical_bias="1.0" />
+
 </android.support.constraint.ConstraintLayout>

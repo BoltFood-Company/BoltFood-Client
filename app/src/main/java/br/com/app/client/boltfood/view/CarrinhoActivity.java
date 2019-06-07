@@ -35,6 +35,7 @@ public class CarrinhoActivity extends AppCompatActivity {
     private static List<Produto> produtos = new ArrayList<>();
 
     private TextView textViewPrecoTotalPedido;
+    private TextView nomeRestaurante;
     private ProgressBar progressBarLoadCarrinho;
     private Button buttonRealizarPedido;
 
@@ -59,7 +60,8 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         progressBarLoadCarrinho = findViewById(R.id.progressBarLoadCarrinho);
 
-        textViewPrecoTotalPedido = findViewById(R.id.textViewPrecoTotalPedido);
+        nomeRestaurante = findViewById(R.id.nomeRestauranteTextView);
+        textViewPrecoTotalPedido = findViewById(R.id.valorTotalTextView);
         buttonRealizarPedido = findViewById(R.id.buttonRealizarPedido);
 
         recyclerView = findViewById(R.id.recyclerViewCarrinho);
@@ -77,6 +79,8 @@ public class CarrinhoActivity extends AppCompatActivity {
                 totalPedido += p.getPrecoNumerico() * p.getQtde();
             }
             textViewPrecoTotalPedido.setText(NumberFormat.getCurrencyInstance().format(totalPedido));
+
+            nomeRestaurante.setText(produtos.get(0).getNomeRestaurante());
         }
         textViewPrecoTotalPedido.setText(NumberFormat.getCurrencyInstance().format(totalPedido));
 
@@ -84,23 +88,27 @@ public class CarrinhoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                FirebaseAuth auth = FirebaseAuth.getInstance();
+                if (produtos.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Carrinho vazio!!", Toast.LENGTH_LONG).show();
+                } else {
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
 
-                Pedido pedido = new Pedido();
-                pedido.setIdCliente(auth.getUid());
-                pedido.setData(new Date());
-                pedido.setPedidoItem(produtos);
-                pedido.setNumeroPedido(new Random().nextInt(1000) + 1);
-                pedido.setTotalPedido(totalPedido);
-                idRestaurante = db.document("Restaurante/" + produtos.get(0).getIdRestaurante().getId());
-                pedido.setIdRestaurante(idRestaurante);
+                    Pedido pedido = new Pedido();
+                    pedido.setIdCliente(auth.getUid());
+                    pedido.setData(new Date());
+                    pedido.setPedidoItem(produtos);
+                    pedido.setNumeroPedido(new Random().nextInt(1000) + 1);
+                    pedido.setTotalPedido(totalPedido);
+                    idRestaurante = db.document("Restaurante/" + produtos.get(0).getIdRestaurante().getId());
+                    pedido.setIdRestaurante(idRestaurante);
 
-                new PedidoController().inserir(pedido);
-                Toast.makeText(getApplicationContext(), getString(R.string.pedidorealizadocomsucesso), Toast.LENGTH_LONG).show();
-                produtos.clear();
-                Intent principalIntent = new Intent(getApplicationContext(), PrincipalActivity.class);
-                startActivity(principalIntent);
-                finish();
+                    new PedidoController().inserir(pedido);
+                    Toast.makeText(getApplicationContext(), getString(R.string.pedidorealizadocomsucesso), Toast.LENGTH_LONG).show();
+                    produtos.clear();
+                    Intent principalIntent = new Intent(getApplicationContext(), PrincipalActivity.class);
+                    startActivity(principalIntent);
+                    finish();
+                }
             }
         });
     }
