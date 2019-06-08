@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/drawable_purple_gradient"
     tools:context=".view.LoginActivity">
 
     <ImageView
@@ -30,6 +31,8 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/email"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +51,8 @@
         android:ems="10"
         android:hint="@string/senha"
         android:inputType="textPassword"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailLoginEditText" />
@@ -59,6 +64,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:onClick="resetSenha"
+        android:textColor="@color/white"
         android:text="@string/esqueciminhasenha"
         app:layout_constraintEnd_toEndOf="@+id/passwordLoginEditText"
         app:layout_constraintTop_toBottomOf="@+id/passwordLoginEditText" />
@@ -87,6 +93,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="5dp"
         android:onClick="cadastrar"
+        android:textColor="@color/white"
         android:text="@string/semcadastro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

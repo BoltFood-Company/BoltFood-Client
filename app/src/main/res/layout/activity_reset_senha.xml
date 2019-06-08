@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/drawable_purple_gradient"
     tools:context=".view.ResetSenhaActivity">
 
     <TextView
@@ -14,6 +15,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/white"
         android:text="@string/recuperacaodesenha"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -31,6 +33,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/white"
         android:text="@string/texto1descricaorecuperacao"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +49,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/white"
         android:text="@string/texto2descricaorecuperacao"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +65,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/white"
         android:text="@string/texto3descricaorecuperacao"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +83,8 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/email"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
         android:inputType="text|textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
