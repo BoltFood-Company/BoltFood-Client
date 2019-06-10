@@ -9,12 +9,6 @@
     android:layout_height="match_parent"
     tools:context=".view.PrincipalActivity">
 
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/flcontent">
-</FrameLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

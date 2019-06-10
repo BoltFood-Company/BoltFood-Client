@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.support.v7.widget.SearchView;
@@ -67,8 +66,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
     private TextView nomeUsuario, emailUsuario;
     private ImageView imagemUsuario;
 
-    private FrameLayout frameLayout;
-
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     @Override
@@ -77,7 +74,6 @@ public class PrincipalActivity extends AppCompatActivity implements SearchView.O
         setContentView(R.layout.activity_principal);
 
         getSupportActionBar().setTitle("Restaurantes");
-        frameLayout = findViewById(R.id.flcontent);
 
         nvDrawer = findViewById(R.id.navigationView);
         mDrawerLayout = findViewById(R.id.drawer);

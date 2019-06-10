@@ -21,12 +21,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:elevation="90dp">
+        android:elevation="90dp"
+        android:background="@drawable/drawable_purple_gradient">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/drawable_purple_gradient">
 
 
         <LinearLayout
@@ -78,7 +80,7 @@
         android:layout_width="match_parent"
         android:id="@+id/recyclerResumoPedido"
         android:layout_height="match_parent"
-        >
+        android:background="@drawable/drawable_purple_gradient">
     </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </RelativeLayout>
