@@ -34,20 +34,19 @@ public class CarrinhoActivity extends AppCompatActivity {
 
     private static List<Produto> produtos = new ArrayList<>();
 
-    private TextView textViewPrecoTotalPedido;
-    private TextView nomeRestaurante;
+    private static TextView textViewPrecoTotalPedido;
+    private static TextView nomeRestaurante;
     private ProgressBar progressBarLoadCarrinho;
     private Button buttonRealizarPedido;
 
-    private RecyclerView recyclerView;
+    private static RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private CarrinhoAdapter listaAdapater;
+    private static CarrinhoAdapter listaAdapater;
 
     private DocumentReference idRestaurante;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    private long totalPedido = 0;
+    private static long totalPedido;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,19 +69,9 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(listaAdapater);
         progressBarLoadCarrinho.setVisibility(View.INVISIBLE);
 
-
-        if (!produtos.isEmpty()) {
-            for (Produto p : produtos) {
-                totalPedido += p.getPrecoNumerico() * p.getQtde();
-            }
-            textViewPrecoTotalPedido.setText(NumberFormat.getCurrencyInstance().format(totalPedido));
-
-            nomeRestaurante.setText(produtos.get(0).getNomeRestaurante());
-        }
-        textViewPrecoTotalPedido.setText(NumberFormat.getCurrencyInstance().format(totalPedido));
+        atualizar();
 
         buttonRealizarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,5 +138,23 @@ public class CarrinhoActivity extends AppCompatActivity {
                 produtos.add(produto);
             }
             return Constantes.PRODUTO_ADICIONADO;
+    }
+
+    public static void atualizar() {
+        recyclerView.setAdapter(listaAdapater);
+        totalPedido = 0;
+        if (!produtos.isEmpty()) {
+            for (Produto p : produtos) {
+                totalPedido += p.getPrecoNumerico() * p.getQtde();
+            }
+            textViewPrecoTotalPedido.setText(NumberFormat.getCurrencyInstance().format(totalPedido));
+
+            nomeRestaurante.setText(produtos.get(0).getNomeRestaurante());
+        }
+        else {
+            textViewPrecoTotalPedido.setText(NumberFormat.getCurrencyInstance().format(totalPedido));
+            nomeRestaurante.setText("");
+        }
+
     }
 }

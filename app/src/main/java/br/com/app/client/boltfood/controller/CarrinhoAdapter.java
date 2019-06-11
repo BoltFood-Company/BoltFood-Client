@@ -1,6 +1,7 @@
 package br.com.app.client.boltfood.controller;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import br.com.app.client.boltfood.R;
 import br.com.app.client.boltfood.model.entity.Produto;
+import br.com.app.client.boltfood.view.CarrinhoActivity;
 
 
 public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHolder> {
@@ -38,7 +40,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CarrinhoAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull CarrinhoAdapter.ViewHolder viewHolder,final int i) {
 
         viewHolder.nome.setText(listaProdutos.get(i).getNome());
         viewHolder.preco.setText(nf.format(listaProdutos.get(i).getPreco()));
@@ -48,7 +50,9 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
         viewHolder.imageApagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext.getApplicationContext(), "Apagando produto do carrinho!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext.getApplicationContext(), "Produto apagado do Carrinho!", Toast.LENGTH_SHORT).show();
+                listaProdutos.remove(i);
+                CarrinhoActivity.atualizar();
             }
         });
 
