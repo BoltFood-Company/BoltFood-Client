@@ -18,6 +18,10 @@ public class AjudaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajuda);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Ajuda");
+
         versao = findViewById(R.id.versaoTextView);
 
         versao.setText(getString(R.string.versao) + " " + BuildConfig.VERSION_NAME + "." + BuildConfig.VERSION_CODE);
@@ -30,4 +34,6 @@ public class AjudaActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

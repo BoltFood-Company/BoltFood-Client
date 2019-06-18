@@ -69,7 +69,7 @@ public class HistoricoPedidosActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBarHistoricoPedidos);
 
         historicoPedidoRecycler.setLayoutManager(new LinearLayoutManager(this));
-        query = db.collection("Pedido").whereEqualTo("idCliente", auth.getUid());
+        query = db.collection("Pedido").whereEqualTo("idCliente", auth.getUid()).orderBy("data");
         adapter = setAdapter(query);
         historicoPedidoRecycler.setAdapter(adapter);
         adapter.startListening();

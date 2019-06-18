@@ -144,8 +144,8 @@ public class ClienteActivity extends AppCompatActivity {
                             clienteController.inserirCliente(cliente);
 
                             salvarImagemStorage();
-
                             Toast.makeText(getApplicationContext(), getString(R.string.cadastroefetuadocomsucesso), Toast.LENGTH_LONG).show();
+                            carregaLogin();
                         } else {
                             progress.dismiss();
                             Toast.makeText(getApplicationContext(), getString(R.string.usuarionaocadastrado), Toast.LENGTH_LONG).show();
