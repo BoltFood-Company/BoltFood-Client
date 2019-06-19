@@ -44,7 +44,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="N¹ 0001"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/white"
                     android:textSize="20dp"
                     tools:visibility="visible" />
             </LinearLayout>
